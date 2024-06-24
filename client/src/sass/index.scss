@@ -1,0 +1,49 @@
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: url('../../public/fonts/CeraPro-Regular.woff') format('woff2');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Cera Pro';
+    src: url('../../public/fonts/CeraPro-Bold.woff') format('woff2');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Cera Pro';
+    src: url('../../public/fonts/CeraPro-Black.woff') format('woff2');
+    font-weight: 900;
+}
+@font-face {
+    font-family: 'Cera Pro';
+    src: url('../../public/fonts/CeraPro-Light.woff') format('woff2');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Cera Pro';
+    src: url('../../public/fonts/CeraPro-Medium.woff') format('woff2');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'Cera Pro';
+    src: url('../../public/fonts/CeraPro-Thin.woff') format('woff2');
+    font-weight: 100;
+}
+
+body {
+    margin: 0;
+    font-family: 'Cera Pro';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.test {
+    font-family: 'Cera Pro';
+    font-size: 70px;
+    font-weight: 900;
+    line-height: 70px;
+    text-transform: uppercase;
+    color: $primaryColor;
+}
