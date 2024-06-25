@@ -1,0 +1,40 @@
+@import '../../sass/variables.scss';
+
+.nav__buttons {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.btnLogin {
+    font-family: 'Cera Pro';
+    font-weight: 500;
+    width: 100px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.searchIcon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.cartIcon {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.cartCounter {
+    position: absolute;
+    top: -2px;
+    right: -6px;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: $greenColor;
+    color: $whiteColor;
+    padding: 1px 5px;
+    border-radius: 50%;
+}

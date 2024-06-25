@@ -1,7 +1,13 @@
+import Header from './components/Header/Header';
+import Shop from './components/Shop/Shop';
+import Slider from './components/Slider/Slider';
+
 function App() {
     return (
         <>
-            <div className="test">Let’s Make a Better Planet</div>
+            <Header />
+            <Slider />
+            <Shop />
         </>
     );
 }
