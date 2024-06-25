@@ -1,0 +1,14 @@
+@import '../../sass/variables.scss';
+
+.sale {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    min-width: 80px;
+    background-color: $greenColor;
+    padding: 7px 9px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    color: $whiteColor;
+}
