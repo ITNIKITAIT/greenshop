@@ -1,11 +1,11 @@
 import styles from './navButtons.module.scss';
-import { CiSearch } from 'react-icons/ci';
+import { FiSearch } from 'react-icons/fi';
 import { IoCartOutline } from 'react-icons/io5';
 
 const NavButtons = () => {
     return (
         <div className={styles.nav__buttons}>
-            <CiSearch className={styles.searchIcon} />
+            <FiSearch className={styles.searchIcon} />
             <div style={{ position: 'relative' }}>
                 <IoCartOutline className={styles.cartIcon} />
                 <span className={styles.cartCounter}>0</span>

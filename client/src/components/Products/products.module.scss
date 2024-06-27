@@ -28,6 +28,17 @@
             border-color: $greenColor;
         }
     }
+    div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+    }
 }
 
 .products__list {
@@ -40,11 +51,13 @@
 }
 
 .img__wrapper {
+    position: relative;
     background-color: $bgColor;
     height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     img {
         width: 250px;
@@ -69,10 +82,66 @@
         font-size: 18px;
         font-weight: 700;
         line-height: 16px;
+        display: inline;
+    }
+
+    &__buttons {
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: 0.15s;
+
+        div {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            background-color: $whiteColor;
+
+            * {
+                color: $primaryColor;
+                font-size: 20px;
+            }
+            &:hover * {
+                color: $greenColor;
+            }
+        }
+    }
+
+    &__standartPrice {
+        position: relative;
+        color: #a5a5a5;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 16px;
+        display: inline;
+        margin-left: 16px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #cbcbcb;
+            top: 50%;
+            left: 0;
+        }
     }
 
     &:hover {
         border-top: 1px solid $greenColor;
+    }
+    &:hover &__buttons {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

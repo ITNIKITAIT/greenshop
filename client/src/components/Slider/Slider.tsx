@@ -22,6 +22,11 @@ const Slider = () => {
                     src="/img/flowers.png"
                     alt="flowers"
                 />
+                <img
+                    className={styles.smallflowersImg}
+                    src="/img/flowers.png"
+                    alt="flowers"
+                />
             </section>
         </div>
     );

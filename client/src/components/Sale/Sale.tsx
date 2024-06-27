@@ -1,7 +1,11 @@
 import styles from './sale.module.scss';
 
-const Sale = () => {
-    return <div className={styles.sale}>13% OFF</div>;
+interface Props {
+    sale: number;
+}
+
+const Sale = ({ sale }: Props) => {
+    return <div className={styles.sale}>{sale}% OFF</div>;
 };
 
 export default Sale;

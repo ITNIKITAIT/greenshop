@@ -1,4 +1,5 @@
 import styles from './products.module.scss';
+import { RiArrowRightSLine } from 'react-icons/ri';
 
 const Pages = () => {
     return (
@@ -7,7 +8,9 @@ const Pages = () => {
             <div>2</div>
             <div>3</div>
             <div>4</div>
-            <div>?</div>
+            <div>
+                <RiArrowRightSLine />
+            </div>
         </div>
     );
 };

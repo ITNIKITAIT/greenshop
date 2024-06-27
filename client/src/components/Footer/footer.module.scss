@@ -1,0 +1,37 @@
+@import '../../sass/variables.scss';
+
+.footer {
+    h3 {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 30px;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    &__icon {
+        font-size: 35px;
+        color: $greenColor;
+    }
+
+    &__list {
+        padding: 25px;
+        background: #46a3581a;
+        border-bottom: 1px solid $greenColor;
+        border-top: 1px solid $greenColor;
+
+        display: flex;
+        align-items: center;
+        gap: 80px;
+
+        p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 22px;
+            max-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}

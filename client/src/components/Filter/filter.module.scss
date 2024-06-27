@@ -41,11 +41,10 @@
 .price {
     margin-left: 10px;
 
-    &__bar {
+    &__slider {
+        height: 10px;
         width: 100%;
-        height: 5px;
         background-color: $greenColor;
-        margin: 20px 0;
     }
 
     p {
@@ -58,6 +57,10 @@
             color: $greenColor;
         }
     }
+}
+
+.slider-handle {
+    transition: none !important;
 }
 
 .filterBtn {

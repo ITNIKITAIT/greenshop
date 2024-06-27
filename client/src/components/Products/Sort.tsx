@@ -1,4 +1,5 @@
 import styles from './products.module.scss';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const Sort = () => {
     return (
@@ -9,7 +10,11 @@ const Sort = () => {
                 <li className={styles.sort__item}>Sale</li>
             </ul>
             <div>
-                Short by: <span>Default sorting</span>
+                Short by:{' '}
+                <span>
+                    Default sorting{' '}
+                    <MdKeyboardArrowDown style={{ height: 'fit-content' }} />
+                </span>
             </div>
         </section>
     );
