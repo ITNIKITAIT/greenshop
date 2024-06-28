@@ -1,11 +1,14 @@
 .rc-slider-handle {
-    transition: none !important;
+    border-color: #fff !important;
+    height: 22px !important;
+    width: 22px !important;
+    margin-top: -8px !important;
+    background-color: #46a358 !important;
+    opacity: 1 !important;
+    border-width: 3px !important;
 }
 
-.rc-slider-track {
-    transition: none !important;
-}
-
-.rc-slider-rail {
-    transition: none !important;
+.rc-slider-handle:focus {
+    box-shadow: none !important;
+    outline: none !important;
 }

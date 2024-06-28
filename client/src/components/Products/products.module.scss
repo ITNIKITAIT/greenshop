@@ -173,3 +173,9 @@
         }
     }
 }
+
+.page__active {
+    background-color: $greenColor;
+    color: $whiteColor;
+    font-weight: 700 !important;
+}

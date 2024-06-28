@@ -1,14 +1,24 @@
+import { useState } from 'react';
+import { IProduct } from './Products';
 import styles from './products.module.scss';
 import { RiArrowRightSLine } from 'react-icons/ri';
 
-const Pages = () => {
+type Props = { products: IProduct[] };
+
+const Pages = ({ products }: Props) => {
+    const [page, setPage] = useState<number>(0);
+
     return (
         <div className={styles.pages__list}>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>
+            {[...Array(Math.ceil(products.length / 2))].map((_, index) => (
+                <div
+                    onClick={() => setPage(index)}
+                    className={page === index ? `${styles.page__active}` : ''}>
+                    {index + 1}
+                </div>
+            ))}
+
+            <div onClick={() => setPage(page + 1)}>
                 <RiArrowRightSLine />
             </div>
         </div>

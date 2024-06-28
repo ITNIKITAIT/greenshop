@@ -5,7 +5,11 @@ import Slider from 'rc-slider';
 import { useState } from 'react';
 
 const Price = () => {
-    const [prices, setPrices] = useState<number[] | number>([0, 1200]);
+    const [prices, setPrices] = useState<[number, number]>([39, 1230]);
+
+    const handleChange = (values: number[] | number) => {
+        setPrices(values as [number, number]);
+    };
 
     return (
         <>
@@ -14,34 +18,20 @@ const Price = () => {
                 <Slider
                     range
                     min={0}
-                    max={3000}
+                    max={2000}
                     defaultValue={prices}
-                    onChange={(e) => setPrices(e)}
+                    allowCross={false}
+                    pushable={50}
+                    onChange={handleChange}
                     trackStyle={[{ backgroundColor: '#46A358', height: 5 }]}
-                    handleStyle={[
-                        {
-                            borderColor: 'white',
-                            height: 22,
-                            width: 22,
-                            marginTop: -8,
-                            backgroundColor: '#46A358',
-                            opacity: 1,
-                            borderWidth: 3,
-                        },
-                        {
-                            borderColor: 'white',
-                            height: 22,
-                            width: 22,
-                            marginTop: -8,
-                            backgroundColor: '#46A358',
-                            opacity: 1,
-                            borderWidth: 3,
-                        },
-                    ]}
+                    handleStyle={[{}, {}]}
                     railStyle={{ backgroundColor: '#46A35833', height: 5 }}
                 />
                 <p>
-                    Price: <span>$39 - $1230</span>
+                    Price:{' '}
+                    <span>
+                        ${prices[0]} - ${prices[1]}
+                    </span>
                 </p>
             </div>
             <button className={'green-btn ' + styles.filterBtn}>Filter</button>

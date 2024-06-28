@@ -1,17 +1,8 @@
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import Shop from './components/Shop/Shop';
-import Slider from './components/Slider/Slider';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
 
 function App() {
-    return (
-        <>
-            <Header />
-            <Slider />
-            <Shop />
-            <Footer />
-        </>
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;

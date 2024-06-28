@@ -32,7 +32,7 @@ const Products = () => {
                     <Product key={product.id} product={product} />
                 ))}
             </div>
-            <Pages />
+            <Pages products={products} />
         </div>
     );
 };
