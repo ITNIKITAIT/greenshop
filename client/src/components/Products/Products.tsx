@@ -12,18 +12,17 @@ export interface IProduct {
 }
 
 const Products = () => {
-    const [products, useProducts] = useState<IProduct[]>([]);
-
-    const Func = (data: IProduct[]) => useProducts(data);
+    const [products, setProducts] = useState<IProduct[]>([]);
 
     useEffect(() => {
         fetch('http://localhost:3200/products')
             .then((data) => data.json())
             .then((res) => {
-                Func(res);
+                setProducts(res);
             })
             .catch((err) => console.log(err));
     }, []);
+
     return (
         <div>
             <Sort />
