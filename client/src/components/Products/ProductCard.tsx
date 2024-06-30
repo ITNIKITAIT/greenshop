@@ -4,17 +4,22 @@ import Sale from '../Sale/Sale';
 import { FiSearch } from 'react-icons/fi';
 import { IoCartOutline } from 'react-icons/io5';
 import { BsHeart } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { getProductRoute } from '../../utils/consts';
 
 interface Props {
     product: IProduct;
 }
 
-const Product = ({ product }: Props) => {
-    const { name, price, sale } = product;
+const ProductCard = ({ product }: Props) => {
+    const { id, name, price, sale } = product;
+    const navigate = useNavigate();
 
     return (
         <div className={styles.product}>
-            <div className={styles.img__wrapper}>
+            <div
+                className={styles.img__wrapper}
+                onClick={() => navigate(getProductRoute(id))}>
                 <img src="./img/flowers.png" alt="" />
                 <div className={styles.product__buttons}>
                     <div>
@@ -45,4 +50,4 @@ const Product = ({ product }: Props) => {
     );
 };
 
-export default Product;
+export default ProductCard;

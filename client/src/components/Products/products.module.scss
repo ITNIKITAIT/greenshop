@@ -58,6 +58,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    cursor: pointer;
 
     img {
         width: 250px;
@@ -66,7 +67,6 @@
 }
 
 .product {
-    cursor: pointer;
     border-top: 1px solid transparent;
     position: relative;
 
@@ -150,7 +150,7 @@
     align-items: center;
     justify-content: end;
     gap: 10px;
-    margin: 90px 0;
+    margin-top: 90px;
 
     div {
         width: 35px;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Pages from './Pages';
-import Product from './Product';
+import ProductCard from './ProductCard';
 import Sort from './Sort';
 import styles from './products.module.scss';
 
@@ -29,7 +29,7 @@ const Products = () => {
             <Sort />
             <div className={styles.products__list}>
                 {products.map((product) => (
-                    <Product key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} />
                 ))}
             </div>
             <Pages products={products} />

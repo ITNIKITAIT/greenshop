@@ -16,9 +16,11 @@
         align-items: center;
         border-bottom: 3px solid transparent;
         transition: 0.2s;
+        color: $primaryColor;
         &:hover {
             font-weight: 700;
             border-bottom: 3px solid $greenColor;
+            color: $greenColor;
         }
     }
 }

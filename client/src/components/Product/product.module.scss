@@ -1,0 +1,75 @@
+@import '../../sass/variables.scss';
+
+.product {
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__imgs {
+        width: 500px;
+        height: 500px;
+        background-color: $bgColor;
+    }
+    &__description {
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+    }
+    &__price {
+        color: $greenColor;
+        font-size: 22px;
+        font-weight: 700;
+    }
+    &__review {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 15px;
+        font-weight: 400;
+        padding: 5px 0;
+        margin-bottom: 15px;
+        border-bottom: 0.3px solid #46a35880;
+    }
+    &__section {
+        margin-bottom: 20px;
+        h5 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            color: $secondaryColor;
+        }
+    }
+}
+
+.size__list {
+    display: flex;
+    gap: 10px;
+
+    li {
+        width: 28px;
+        height: 28px;
+        color: $secondaryColor;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid #eaeaea;
+        cursor: pointer;
+
+        &:hover {
+            color: $greenColor;
+            border: 1px solid $greenColor;
+            font-weight: 700;
+        }
+    }
+}

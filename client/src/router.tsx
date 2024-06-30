@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import { HOME_ROUTE, SHOP_ROUTE } from './utils/consts';
+import ShopPage from './pages/ShopPage';
+import ProductPage from './pages/ProductPage';
+import { HOME_ROUTE, PRODUCT_ROUTE, SHOP_ROUTE } from './utils/consts';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 export const router = createBrowserRouter([
@@ -11,6 +13,10 @@ export const router = createBrowserRouter([
     },
     {
         path: SHOP_ROUTE,
-        element: <div>HEllo</div>,
+        element: <ShopPage />,
+    },
+    {
+        path: PRODUCT_ROUTE,
+        element: <ProductPage />,
     },
 ]);
