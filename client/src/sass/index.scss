@@ -80,6 +80,7 @@ button {
 }
 
 .green-btn {
+    font-family: 'Cera Pro';
     background-color: $greenColor;
     color: $whiteColor;
     display: flex;
@@ -91,6 +92,22 @@ button {
 
 .green-btn:hover {
     opacity: 0.9;
+}
+
+.white-btn {
+    font-family: 'Cera Pro';
+    background-color: $whiteColor;
+    color: $greenColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    transition: 0.1s;
+    border: 1px solid $greenColor;
+}
+
+.white-btn:hover {
+    background-color: #f8f8f8;
 }
 
 .logo {

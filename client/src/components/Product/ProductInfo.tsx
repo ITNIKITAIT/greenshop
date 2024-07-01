@@ -4,6 +4,7 @@ import { FaStar } from 'react-icons/fa';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
+import ProductButtons from './ProductButtons';
 
 const ProductInfo = ({ name, price, sale }: IProduct) => {
     return (
@@ -27,8 +28,8 @@ const ProductInfo = ({ name, price, sale }: IProduct) => {
                 </div>
                 <div>
                     <div className={styles.stars}>
-                        {[...Array(5)].map(() => (
-                            <FaStar className={styles.starIcon} />
+                        {[...Array(5)].map((_, i) => (
+                            <FaStar key={i} className={styles.starIcon} />
                         ))}
                     </div>
                     19 Customer Review
@@ -52,7 +53,7 @@ const ProductInfo = ({ name, price, sale }: IProduct) => {
                     <li>XL</li>
                 </ul>
             </div>
-            <div className={styles.product__buttons}>test</div>
+            <ProductButtons />
             <div className={styles.product__info}>
                 <p>
                     SKU: <span>1995751877966</span>

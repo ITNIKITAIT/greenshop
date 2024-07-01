@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import styles from './product.module.scss';
 import { IProduct } from '../Products/Products';
 import ProductInfo from './ProductInfo';
+import ProductImages from './ProductImages';
+import ProductMore from './ProductMore';
 
 const Product = () => {
     const { productId } = useParams();
@@ -22,9 +24,10 @@ const Product = () => {
     return (
         <div className="container">
             <div className={styles.product__wrapper}>
-                <div className={styles.product__imgs}></div>
+                <ProductImages />
                 <ProductInfo {...product} />
             </div>
+            <ProductMore />
         </div>
     );
 };
