@@ -1,0 +1,21 @@
+@import '../../sass/variables.scss';
+
+.releted {
+    &__title {
+        font-family: Cera Pro;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 16px;
+        text-align: left;
+        color: $greenColor;
+        padding-bottom: 12px;
+        border-bottom: 0.3px solid #46a35880;
+    }
+    &__list {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        margin: 50px 0;
+    }
+}

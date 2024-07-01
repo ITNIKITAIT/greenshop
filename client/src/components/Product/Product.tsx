@@ -5,6 +5,7 @@ import { IProduct } from '../Products/Products';
 import ProductInfo from './ProductInfo';
 import ProductImages from './ProductImages';
 import ProductMore from './ProductMore';
+import ReletedProducts from '../ReletedProducts/ReletedProducts';
 
 const Product = () => {
     const { productId } = useParams();
@@ -28,6 +29,7 @@ const Product = () => {
                 <ProductInfo {...product} />
             </div>
             <ProductMore />
+            <ReletedProducts />
         </div>
     );
 };

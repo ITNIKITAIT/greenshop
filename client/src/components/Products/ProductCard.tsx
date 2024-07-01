@@ -6,6 +6,8 @@ import { IoCartOutline } from 'react-icons/io5';
 import { BsHeart } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { getProductRoute } from '../../utils/consts';
+import { useAppDispatch } from '../../store/store';
+import { addProduct } from '../../modules/shoppingCart.slice';
 
 interface Props {
     product: IProduct;
@@ -14,15 +16,19 @@ interface Props {
 const ProductCard = ({ product }: Props) => {
     const { id, name, price, sale } = product;
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     return (
         <div className={styles.product}>
             <div
                 className={styles.img__wrapper}
                 onClick={() => navigate(getProductRoute(id))}>
-                <img src="./img/flowers.png" alt="" />
+                <img src="/img/flowers.png" alt="" />
                 <div className={styles.product__buttons}>
-                    <div>
+                    <div
+                        onClick={() =>
+                            dispatch(addProduct({ ...product, quantity: 1 }))
+                        }>
                         <IoCartOutline className={styles.product__icons} />
                     </div>
                     <div>

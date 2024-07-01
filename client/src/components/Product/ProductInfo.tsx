@@ -6,7 +6,8 @@ import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
 import ProductButtons from './ProductButtons';
 
-const ProductInfo = ({ name, price, sale }: IProduct) => {
+const ProductInfo = (product: IProduct) => {
+    const { name, price, sale } = product;
     return (
         <div className={styles.product__description}>
             <h2>{name}</h2>
@@ -53,7 +54,7 @@ const ProductInfo = ({ name, price, sale }: IProduct) => {
                     <li>XL</li>
                 </ul>
             </div>
-            <ProductButtons />
+            <ProductButtons {...product} />
             <div className={styles.product__info}>
                 <p>
                     SKU: <span>1995751877966</span>
