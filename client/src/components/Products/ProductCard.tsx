@@ -1,6 +1,6 @@
 import styles from './products.module.scss';
+import Discount from '../Discount/Discount';
 import { IProduct } from './Products';
-import Sale from '../Sale/Sale';
 import { FiSearch } from 'react-icons/fi';
 import { IoCartOutline } from 'react-icons/io5';
 import { BsHeart } from 'react-icons/bs';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { getProductRoute } from '../../utils/consts';
 import { useAppDispatch } from '../../store/store';
 import { addProduct } from '../../modules/shoppingCart.slice';
+import { withDiscount } from '../../utils/discountFunc';
 
 interface Props {
     product: IProduct;
@@ -44,10 +45,10 @@ const ProductCard = ({ product }: Props) => {
             {sale ? (
                 <>
                     <p className={styles.product__price}>
-                        ${Math.floor(price * ((100 - sale) / 100))}.00
+                        ${withDiscount(price, sale)}.00
                     </p>
                     <p className={styles.product__standartPrice}>${price}.00</p>
-                    <Sale sale={sale} />
+                    <Discount sale={sale} />
                 </>
             ) : (
                 <p className={styles.product__price}>${price}.00</p>

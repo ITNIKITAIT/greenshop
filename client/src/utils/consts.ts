@@ -1,8 +1,8 @@
 const HOME_ROUTE: string = '/';
 const SHOP_ROUTE: string = '/shop';
-const PRODUCT_ROUTE: string = '/shop/product/:productId';
-const SHOPPING_CART_ROUTE: string = '/shoppingCart';
-const CHECKOUT_ROUTE: string = '/checkout';
+const PRODUCT_ROUTE: string = SHOP_ROUTE + '/product/:productId';
+const SHOPPING_CART_ROUTE: string = SHOP_ROUTE + '/shoppingCart';
+const CHECKOUT_ROUTE: string = SHOP_ROUTE + '/checkout';
 
 export {
     HOME_ROUTE,

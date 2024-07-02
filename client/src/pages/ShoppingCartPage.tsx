@@ -1,17 +1,17 @@
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import Path from '../components/Path/Path';
-import Shop from '../components/Shop/Shop';
+import ShoppingCart from '../components/ShoppingCart/ShoppingCart';
 
-const ShopPage = () => {
+const ShoppingCartPage = () => {
     return (
         <>
             <Header />
             <Path />
-            <Shop />
+            <ShoppingCart />
             <Footer />
         </>
     );
 };
 
-export default ShopPage;
+export default ShoppingCartPage;

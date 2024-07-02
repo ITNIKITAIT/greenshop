@@ -13,6 +13,7 @@ const Pages = ({ products }: Props) => {
             {[...Array(Math.ceil(products.length / 2))].map((_, index) => (
                 <div
                     onClick={() => setPage(index)}
+                    key={index}
                     className={page === index ? `${styles.page__active}` : ''}>
                     {index + 1}
                 </div>
