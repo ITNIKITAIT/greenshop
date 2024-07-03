@@ -2,8 +2,7 @@ import Logo from '../Logo/Logo';
 import styles from './footer.module.scss';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { IoMailOutline } from 'react-icons/io5';
-import { PiPhoneCallThin } from "react-icons/pi";
-
+import { PiPhoneCallThin } from 'react-icons/pi';
 
 const Footer = () => {
     return (
@@ -26,8 +25,8 @@ const Footer = () => {
                         +88 01911 717 490
                     </p>
                 </div>
+                <h3>© 2021 GreenShop. All Rights Reserved.</h3>
             </div>
-            <h3>© 2021 GreenShop. All Rights Reserved.</h3>
         </footer>
     );
 };

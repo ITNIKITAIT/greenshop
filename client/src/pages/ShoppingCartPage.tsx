@@ -9,7 +9,6 @@ const ShoppingCartPage = () => {
             <Header />
             <Path />
             <ShoppingCart />
-            <Footer />
         </>
     );
 };

@@ -20,7 +20,8 @@ const Product = () => {
             .then((data) => data.json())
             .then((res) => setProduct(filterById(res)))
             .catch((err) => console.log(err));
-    }, []);
+        window.scrollTo(0, 0);
+    }, [productId]);
 
     return (
         <div className="container">

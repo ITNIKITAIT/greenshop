@@ -17,11 +17,12 @@ export const shoppingCartSlice = createSlice({
     initialState,
     selectors: {
         allProducts: (state) => state,
-        amountProducts: (state) =>
+        amountProducts: (state): number =>
             state.items.reduce((acc, item) => acc + item.quantity, 0),
-        fullPrice: (state) =>
+        fullPrice: (state): number =>
             state.items.reduce(
-                (acc, item) => acc + withDiscount(item.price, item.sale),
+                (acc, item) =>
+                    acc + withDiscount(item.price, item.sale) * item.quantity,
                 0
             ),
     },

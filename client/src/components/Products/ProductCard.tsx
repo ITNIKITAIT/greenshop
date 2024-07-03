@@ -27,9 +27,10 @@ const ProductCard = ({ product }: Props) => {
                 <img src="/img/flowers.png" alt="" />
                 <div className={styles.product__buttons}>
                     <div
-                        onClick={() =>
-                            dispatch(addProduct({ ...product, quantity: 1 }))
-                        }>
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            dispatch(addProduct({ ...product, quantity: 1 }));
+                        }}>
                         <IoCartOutline className={styles.product__icons} />
                     </div>
                     <div>

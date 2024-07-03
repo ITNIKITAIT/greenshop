@@ -9,25 +9,27 @@ import {
 } from '../../modules/shoppingCart.slice';
 import { withDiscount } from '../../utils/discountFunc';
 import { useAppDispatch } from '../../store/store';
+import { getProductRoute } from '../../utils/consts';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
-    const [amount, setAmount] = useState<number>(quantity);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleMinus = () => {
-        if (amount !== 1) {
-            setAmount(amount - 1);
+        if (quantity !== 1) {
             dispatch(deleteOneProduct(id));
         }
     };
     const handlePlus = () => {
-        setAmount(amount + 1);
         dispatch(addOneProduct(id));
     };
 
     return (
         <>
-            <div className={styles.item}>
+            <div
+                className={styles.item}
+                onClick={() => navigate(getProductRoute(id))}>
                 <img src="/img/flowers.png" alt="flower" />
                 <section>
                     <h5 className={styles.item__name}>{name}</h5>
@@ -42,7 +44,7 @@ const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
                     <button onClick={handleMinus} className="green-btn">
                         -
                     </button>
-                    {amount}
+                    {quantity}
                     <button onClick={handlePlus} className="green-btn">
                         +
                     </button>
@@ -50,7 +52,7 @@ const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
             </div>
 
             <div className={styles.total}>
-                ${withDiscount(price, sale) * amount}.00
+                ${withDiscount(price, sale) * quantity}.00
             </div>
             <div>
                 <AiOutlineDelete

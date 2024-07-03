@@ -116,6 +116,10 @@
         }
     }
 
+    &__buttons div:hover .product {
+        border-top: 5px solid red;
+    }
+
     &__standartPrice {
         position: relative;
         color: #a5a5a5;
