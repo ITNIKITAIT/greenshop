@@ -1,5 +1,6 @@
 import { allProducts } from '../../modules/shoppingCart.slice';
 import { useAppSelector } from '../../store/store';
+import TotalPrice from '../TotalPrice.tsx/TotalPrice';
 import styles from './checkout.module.scss';
 import CheckoutItem from './CheckoutItem';
 
@@ -20,6 +21,15 @@ const CheckoutInfo = () => {
                     </li>
                 ))}
             </ul>
+            <div className={styles.price__wrapper}>
+                <TotalPrice />
+                <button
+                    type="submit"
+                    form="main-form"
+                    className={'green-btn ' + styles.orderBtn}>
+                    Place Order
+                </button>
+            </div>
         </div>
     );
 };

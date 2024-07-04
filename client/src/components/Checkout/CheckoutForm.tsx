@@ -22,7 +22,7 @@ const CheckoutForm = () => {
     return (
         <div>
             <h2 className={styles.title}>Billing Address</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form id="main-form" onSubmit={handleSubmit(onSubmit)}>
                 <label>
                     <p>
                         First Name

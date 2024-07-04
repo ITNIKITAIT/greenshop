@@ -8,8 +8,8 @@ const CheckoutItem = ({ sale, price, name, quantity }: ICartItem) => {
             <div className={styles.desc}>
                 <img src="/img/flowers.png" alt="flower" />
                 <section>
-                    <h5 className={styles.item__name}>{name}</h5>
-                    <p className={styles.item__SKU}>
+                    <h5 className={styles.name}>{name}</h5>
+                    <p className={styles.SKU}>
                         SKU: <span>1995751877966</span>
                     </p>
                 </section>

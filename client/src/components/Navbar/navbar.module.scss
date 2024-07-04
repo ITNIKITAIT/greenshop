@@ -19,8 +19,12 @@
         color: $primaryColor;
         &:hover {
             font-weight: 700;
-            border-bottom: 3px solid $greenColor;
             color: $greenColor;
         }
+    }
+    .current {
+        font-weight: 700;
+        border-bottom: 3px solid $greenColor;
+        color: $greenColor;
     }
 }

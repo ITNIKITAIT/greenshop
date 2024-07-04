@@ -1,9 +1,13 @@
-import styles from './slider.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { SHOP_ROUTE } from '../../utils/consts';
+import styles from './hero.module.scss';
 
-const Slider = () => {
+const Hero = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="container">
-            <section className={styles.slider}>
+            <section className={styles.hero}>
                 <h4>Welcome to GreenShop</h4>
                 <h1>
                     Let’s Make a Better <span>Planet</span>
@@ -13,7 +17,9 @@ const Slider = () => {
                     and trendy plants. Use our plants to create an unique Urban
                     Jungle. Order your favorite plants!
                 </p>
-                <button className={'green-btn ' + styles.shopBtn}>
+                <button
+                    className={'green-btn ' + styles.shopBtn}
+                    onClick={() => navigate(SHOP_ROUTE)}>
                     SHOP NOW
                 </button>
 
@@ -32,4 +38,4 @@ const Slider = () => {
     );
 };
 
-export default Slider;
+export default Hero;
