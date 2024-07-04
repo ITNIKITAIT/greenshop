@@ -12,11 +12,16 @@ type Inputs = {
     notes: string;
 };
 
-const CheckoutForm = () => {
+interface Props {
+    setModal: (modal: boolean) => void;
+}
+
+const CheckoutForm = ({ setModal }: Props) => {
     const { handleSubmit, register } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
+        setModal(true);
     };
 
     return (

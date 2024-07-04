@@ -1,0 +1,109 @@
+@import '../../sass/variables.scss';
+
+.modalWrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.modal {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    background-color: $whiteColor;
+    padding-bottom: 20px;
+
+    &__gratitude {
+        background-color: #46a3580f;
+        padding: 30px 0 15px;
+
+        img {
+            margin: 0 auto;
+            display: block;
+        }
+        p {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: $secondaryColor;
+            text-align: center;
+        }
+    }
+    &__list {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #46a3580f;
+        border-top: 2px solid #46a3580f;
+
+        li {
+            border-right: 1px solid #46a35833;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 16px;
+            color: $secondaryColor;
+            padding: 0 25px;
+            p {
+                font-size: 14px;
+                font-weight: 400;
+            }
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+    &__info {
+        padding: 0 40px;
+        margin-bottom: 18px;
+    }
+    &__title {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 12px;
+    }
+    &__total {
+        max-width: 60%;
+        margin-left: auto;
+        padding-right: 10px;
+    }
+    &__warn {
+        text-align: center;
+        margin: 0 50px 30px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        color: $secondaryColor;
+        padding-top: 18px;
+        border-top: 0.3px solid #46a35880;
+    }
+}
+
+.closeSvg {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: $secondaryColor;
+    &:hover {
+        color: $greenColor;
+    }
+}
+
+.doneBtn {
+    width: 130px;
+    height: 40px;
+    margin: auto;
+}

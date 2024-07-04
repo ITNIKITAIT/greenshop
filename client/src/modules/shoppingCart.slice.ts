@@ -25,6 +25,14 @@ export const shoppingCartSlice = createSlice({
                     acc + withDiscount(item.price, item.sale) * item.quantity,
                 0
             ),
+        priceWithDelivery: (state): number =>
+            state.items.reduce(
+                (acc, item) =>
+                    acc +
+                    withDiscount(item.price, item.sale) * item.quantity +
+                    3 * item.quantity,
+                0
+            ),
     },
     reducers: {
         addProduct: (state, action: PayloadAction<ICartItem>) => {
@@ -65,6 +73,6 @@ export const {
     deleteFullProduct,
     addOneProduct,
 } = shoppingCartSlice.actions;
-export const { allProducts, amountProducts, fullPrice } =
+export const { allProducts, amountProducts, fullPrice, priceWithDelivery } =
     shoppingCartSlice.selectors;
 export default shoppingCartSlice.reducer;
