@@ -16,7 +16,7 @@ export const shoppingCartSlice = createSlice({
     name: 'shoppingCart',
     initialState,
     selectors: {
-        allProducts: (state) => state,
+        allProducts: (state): ICartItem[] => state.items,
         amountProducts: (state): number =>
             state.items.reduce((acc, item) => acc + item.quantity, 0),
         fullPrice: (state): number =>

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './shoppingCart.module.scss';
-import { SHOP_ROUTE } from '../../utils/consts';
+import { CHECKOUT_ROUTE, SHOP_ROUTE } from '../../utils/consts';
 import { useAppSelector } from '../../store/store';
 import { amountProducts, fullPrice } from '../../modules/shoppingCart.slice';
 
@@ -8,6 +8,8 @@ const CartTotal = () => {
     const price = useAppSelector(fullPrice);
     const amount = useAppSelector(amountProducts);
     const shippingPrice = amount * 3;
+
+    const navigate = useNavigate();
 
     return (
         <div className={styles.cart__total}>
@@ -23,7 +25,9 @@ const CartTotal = () => {
             <div>
                 Total<span>${price + shippingPrice}.00</span>
             </div>
-            <button className={'green-btn ' + styles.checkoutBtn}>
+            <button
+                className={'green-btn ' + styles.checkoutBtn}
+                onClick={() => navigate(CHECKOUT_ROUTE)}>
                 Proceed To Checkout
             </button>
             <Link className={styles.backtoshop} to={SHOP_ROUTE}>

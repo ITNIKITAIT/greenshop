@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './shoppingCart.module.scss';
 import { AiOutlineDelete } from 'react-icons/ai';
 import {

@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import ProductPage from './pages/ProductPage';
 import {
+    CHECKOUT_ROUTE,
     HOME_ROUTE,
     PRODUCT_ROUTE,
     SHOPPING_CART_ROUTE,
@@ -10,6 +11,7 @@ import {
 } from './utils/consts';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import ShoppingCartPage from './pages/ShoppingCartPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 export const router = createBrowserRouter([
     {
@@ -28,5 +30,9 @@ export const router = createBrowserRouter([
     {
         path: SHOPPING_CART_ROUTE,
         element: <ShoppingCartPage />,
+    },
+    {
+        path: CHECKOUT_ROUTE,
+        element: <CheckoutPage />,
     },
 ]);

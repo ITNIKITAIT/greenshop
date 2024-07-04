@@ -1,0 +1,104 @@
+@import '../../sass/variables.scss';
+
+.checkout {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        max-width: 720px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px 20px;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 15px;
+            color: $primaryColor;
+            p {
+                display: flex;
+                align-items: center;
+            }
+            span {
+                color: red;
+                margin-left: 5px;
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+
+        input,
+        textarea {
+            border: 1px solid #eaeaea;
+            border-radius: 3px;
+            height: 40px;
+            width: 350px;
+            outline: none;
+            font-family: 'Cera Pro';
+            font-size: 15px;
+            font-weight: 400;
+            padding-left: 10px;
+
+            &::placeholder {
+                font-family: 'Cera Pro';
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 15px;
+                color: #a5a5a5;
+            }
+        }
+    }
+    .notes {
+        height: 150px;
+        padding: 10px;
+        resize: none;
+    }
+
+    .info {
+        width: 410px;
+
+        .subtitle {
+            border-bottom: 0.3px solid #46a35880;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 16px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.list__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: $bgColor;
+    height: 70px;
+    padding: 0 10px;
+    .desc {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+    img {
+        width: auto;
+        height: 70px;
+    }
+    div {
+        height: fit-content;
+    }
+}

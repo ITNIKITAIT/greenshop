@@ -14,7 +14,7 @@ const CartProducts = () => {
             <h3 className={styles.title}>Total</h3>
             <h3 className={styles.title}>{}</h3>
 
-            {productsCart.items.map((product, i) => (
+            {productsCart.map((product, i) => (
                 <CartItem key={i} {...product} />
             ))}
         </div>
