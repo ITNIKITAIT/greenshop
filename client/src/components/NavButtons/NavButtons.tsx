@@ -6,10 +6,14 @@ import { useAppSelector } from '../../store/store';
 import { amountProducts } from '../../modules/shoppingCart.slice';
 import { useNavigate } from 'react-router-dom';
 import { SHOPPING_CART_ROUTE } from '../../utils/consts';
+import { useState } from 'react';
+import Authorization from '../Authorization/Authorization';
 
 const NavButtons = () => {
     const amount = useAppSelector(amountProducts);
     const navigate = useNavigate();
+
+    const [auth, setAuth] = useState<boolean>(false);
 
     return (
         <div className={styles.nav__buttons}>
@@ -20,10 +24,13 @@ const NavButtons = () => {
                 <IoCartOutline className={styles.cartIcon} />
                 <span className={styles.cartCounter}>{amount}</span>
             </div>
-            <button className={`green-btn ` + styles.btnLogin}>
+            <button
+                onClick={() => setAuth(true)}
+                className={`green-btn ` + styles.btnLogin}>
                 <TbLogin2 className={styles.loginIcon} />
                 Login
             </button>
+            {auth && <Authorization setAuth={setAuth} />}
         </div>
     );
 };

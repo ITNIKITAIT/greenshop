@@ -50,7 +50,7 @@ const Modal = ({ setModal }: Props) => {
                     date for your items.
                 </p>
                 <button
-                    className={'green-btn ' + styles.doneBtn}
+                    className={`green-btn ${styles.doneBtn}`}
                     onClick={closeModal}>
                     Done
                 </button>
