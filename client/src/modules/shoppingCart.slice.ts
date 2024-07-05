@@ -64,6 +64,9 @@ export const shoppingCartSlice = createSlice({
             ) as ICartItem;
             currProduct.quantity -= 1;
         },
+        resetProducts: (state, action) => {
+            state.items = [];
+        },
     },
 });
 
@@ -72,6 +75,7 @@ export const {
     deleteOneProduct,
     deleteFullProduct,
     addOneProduct,
+    resetProducts,
 } = shoppingCartSlice.actions;
 export const { allProducts, amountProducts, fullPrice, priceWithDelivery } =
     shoppingCartSlice.selectors;

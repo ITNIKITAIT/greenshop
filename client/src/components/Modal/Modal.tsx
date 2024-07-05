@@ -1,5 +1,8 @@
-import { priceWithDelivery } from '../../modules/shoppingCart.slice';
-import { useAppSelector } from '../../store/store';
+import {
+    priceWithDelivery,
+    resetProducts,
+} from '../../modules/shoppingCart.slice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import CheckoutList from '../Checkout/CheckoutList';
 import TotalPrice from '../TotalPrice.tsx/TotalPrice';
 import styles from './modal.module.scss';
@@ -11,9 +14,11 @@ interface Props {
 
 const Modal = ({ setModal }: Props) => {
     const total: number = useAppSelector(priceWithDelivery);
+    const dispatch = useAppDispatch();
 
     const closeModal = () => {
         setModal(false);
+        dispatch(resetProducts(''));
     };
 
     return (

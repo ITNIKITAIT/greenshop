@@ -19,7 +19,7 @@ interface Props {
 const CheckoutForm = ({ setModal }: Props) => {
     const { handleSubmit, register } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
         console.log(data);
         setModal(true);
     };
