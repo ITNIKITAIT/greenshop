@@ -4,6 +4,8 @@ const PRODUCT_ROUTE: string = SHOP_ROUTE + '/product/:productId';
 const SHOPPING_CART_ROUTE: string = SHOP_ROUTE + '/shoppingCart';
 const CHECKOUT_ROUTE: string = SHOP_ROUTE + '/checkout';
 
+export const API = 'http://localhost:5000/api';
+
 export {
     HOME_ROUTE,
     SHOP_ROUTE,

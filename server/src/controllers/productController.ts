@@ -13,12 +13,12 @@ class ProductController {
     async getProductById(req: Request, res: Response) {
         const productId = req.params.id;
         try {
-            const products = await prisma.product.findMany({
+            const product = await prisma.product.findFirst({
                 where: {
                     id: parseInt(productId),
                 },
             });
-            res.json(products);
+            res.json(product);
         } catch (e) {
             console.log(e);
         }

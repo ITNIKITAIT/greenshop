@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import Pages from './Pages';
 import ProductCard from './ProductCard';
 import Sort from './Sort';
 import styles from './products.module.scss';
+import { productApi } from '../../api/productApi';
 
 export interface IProduct {
     id: number;
@@ -12,26 +12,18 @@ export interface IProduct {
 }
 
 const Products = () => {
-    const [products, setProducts] = useState<IProduct[]>([]);
-
-    useEffect(() => {
-        fetch('http://localhost:3200/products')
-            .then((data) => data.json())
-            .then((res) => {
-                setProducts(res);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+    const { data, isLoading } = productApi.useGetAllProductsQuery();
 
     return (
         <div>
             <Sort />
             <div className={styles.products__list}>
-                {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
+                {!isLoading &&
+                    (data ?? []).map((product) => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
             </div>
-            <Pages products={products} />
+            {!isLoading && <Pages products={data ?? []} />}
         </div>
     );
 };
