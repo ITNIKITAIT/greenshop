@@ -1,5 +1,9 @@
 @import '../../sass/variables.scss';
 
+.products {
+    width: 100%;
+}
+
 .sort {
     display: flex;
     justify-content: space-between;
@@ -25,7 +29,6 @@
 
         &:hover {
             color: $greenColor;
-            border-color: $greenColor;
         }
     }
     div {
@@ -38,6 +41,11 @@
             gap: 6px;
             cursor: pointer;
         }
+    }
+    &__current {
+        font-weight: 700;
+        color: $greenColor;
+        border-color: $greenColor;
     }
 }
 

@@ -1,13 +1,38 @@
+import { useState } from 'react';
 import styles from './products.module.scss';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useSearchParams } from 'react-router-dom';
+
+export type SortType = 'all' | 'new' | 'sale';
 
 const Sort = () => {
+    const [sortType, setSortType] = useState<SortType>('all');
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const sortOptions: { type: SortType; content: string }[] = [
+        { type: 'all', content: 'All Plants' },
+        { type: 'new', content: 'New Arrivals' },
+        { type: 'sale', content: 'Sale' },
+    ];
+
+    const handleType = (type: SortType) => {
+        setSearchParams({ sort: type });
+        setSortType(type);
+    };
+
     return (
         <section className={styles.sort}>
             <ul className={styles.sort__list}>
-                <li className={styles.sort__item}>All Plants</li>
-                <li className={styles.sort__item}>New Arrivals</li>
-                <li className={styles.sort__item}>Sale</li>
+                {sortOptions.map((option) => (
+                    <li
+                        key={option.type}
+                        className={`${styles.sort__item} ${
+                            sortType === option.type ? styles.sort__current : ''
+                        }`}
+                        onClick={() => handleType(option.type)}>
+                        {option.content}
+                    </li>
+                ))}
             </ul>
             <div>
                 Short by:{' '}

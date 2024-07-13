@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import prisma from '../../prisma/prisma';
+import { sortedProducts } from '../utils/sortedProducts';
 
 class ProductController {
-    async getAllProducts(req: Request, res: Response) {
+    async getProducts(req: Request, res: Response) {
+        const type = req.query.sort || 'all';
         try {
-            const products = await prisma.product.findMany();
+            const products = await sortedProducts(type);
             res.json(products);
         } catch (e) {
             console.log(e);
@@ -19,6 +21,16 @@ class ProductController {
                 },
             });
             res.json(product);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    async getReletedProducts(req: Request, res: Response) {
+        try {
+            const reletedProducts = await prisma.product.findMany({
+                take: 4,
+            });
+            res.json(reletedProducts);
         } catch (e) {
             console.log(e);
         }

@@ -1,8 +1,9 @@
 import Pages from './Pages';
 import ProductCard from './ProductCard';
-import Sort from './Sort';
+import Sort, { SortType } from './Sort';
 import styles from './products.module.scss';
 import { productApi } from '../../api/productApi';
+import { useSearchParams } from 'react-router-dom';
 
 export interface IProduct {
     id: number;
@@ -12,18 +13,24 @@ export interface IProduct {
 }
 
 const Products = () => {
-    const { data, isLoading } = productApi.useGetAllProductsQuery();
+    const [searchParams] = useSearchParams();
+    const sortType = (searchParams.get('sort') as SortType) || 'all';
+    const { data: products, isLoading } =
+        productApi.useGetSortedProductsQuery(sortType);
 
     return (
-        <div>
+        <div className={styles.products}>
             <Sort />
-            <div className={styles.products__list}>
-                {!isLoading &&
-                    (data ?? []).map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-            </div>
-            {!isLoading && <Pages products={data ?? []} />}
+            {!isLoading && (
+                <>
+                    <div className={styles.products__list}>
+                        {(products ?? []).map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                    <Pages products={products ?? []} />
+                </>
+            )}
         </div>
     );
 };

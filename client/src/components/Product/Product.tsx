@@ -14,7 +14,6 @@ const Product = () => {
     const { data: product } = productApi.useGetProductByIdQuery(
         productId ?? skipToken
     );
-    console.log(product);
     return (
         <div className="container">
             <div className={styles.product__wrapper}>

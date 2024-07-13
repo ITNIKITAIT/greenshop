@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
 import ProductCard from '../Products/ProductCard';
 import { IProduct } from '../Products/Products';
 import styles from './reletedProducts.module.scss';
+import { productApi } from '../../api/productApi';
 
 const ReletedProducts = () => {
-    const [reletedProducts, setReletedProducts] = useState<IProduct[]>([]);
+    const { data: reletedProducts, isLoading } =
+        productApi.useGetReletedProductsQuery();
 
-    useEffect(() => {
-        fetch('http://localhost:3200/products')
-            .then((data) => data.json())
-            .then((res) => {
-                setReletedProducts(res);
-            })
-            .catch((err) => console.log(err));
-    }, []);
     return (
         <div className="container">
             <section className={styles.releted}>
                 <h2 className={styles.releted__title}>Releted Products</h2>
                 <div className={styles.releted__list}>
-                    {reletedProducts
-                        .filter((product) => product.id <= 4)
-                        .map((product) => (
+                    {!isLoading &&
+                        (reletedProducts as IProduct[]).map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
                 </div>
