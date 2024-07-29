@@ -16,7 +16,10 @@ const Sort = () => {
     ];
 
     const handleType = (type: SortType) => {
-        setSearchParams({ sort: type });
+        setSearchParams((params) => {
+            params.set('sort', type);
+            return params;
+        });
         setSortType(type);
     };
 

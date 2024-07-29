@@ -3,12 +3,34 @@ import './custom-slider.scss';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+type RangePrice = [number, number];
 
 const Price = () => {
-    const [prices, setPrices] = useState<[number, number]>([39, 1230]);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const getDefaultPrice = () => {
+        let defaultValue: RangePrice = [39, 1230];
+        const [from, to] = [searchParams.get('from'), searchParams.get('to')];
+        if (from && to) {
+            defaultValue = [parseInt(from), parseInt(to)];
+        }
+        return defaultValue;
+    };
+
+    const [prices, setPrices] = useState<RangePrice>(getDefaultPrice());
 
     const handleChange = (values: number[] | number) => {
-        setPrices(values as [number, number]);
+        setPrices(values as RangePrice);
+    };
+
+    const handleFilter = () => {
+        setSearchParams((params) => {
+            params.set('from', prices[0].toString());
+            params.set('to', prices[1].toString());
+            return params;
+        });
     };
 
     return (
@@ -34,7 +56,11 @@ const Price = () => {
                     </span>
                 </p>
             </div>
-            <button className={'green-btn ' + styles.filterBtn}>Filter</button>
+            <button
+                onClick={handleFilter}
+                className={'green-btn ' + styles.filterBtn}>
+                Filter
+            </button>
         </>
     );
 };

@@ -5,8 +5,10 @@ import { sortedProducts } from '../utils/sortedProducts';
 class ProductController {
     async getProducts(req: Request, res: Response) {
         const type = req.query.sort || 'all';
+        const from = req.query.from;
+        const to = req.query.to;
         try {
-            const products = await sortedProducts(type);
+            const products = await sortedProducts(type, from, to);
             res.json(products);
         } catch (e) {
             console.log(e);

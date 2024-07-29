@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         element: <ShopPage />,
         loader: async () => {
             store.dispatch(
-                productApi.util.prefetch('getSortedProducts', 'all', {})
+                productApi.util.prefetch('getSortedProducts', {}, {})
             );
             return null;
         },

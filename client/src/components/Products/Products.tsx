@@ -12,11 +12,21 @@ export interface IProduct {
     sale: null | number;
 }
 
+export type FilterType = {
+    type?: SortType;
+    from?: number | null;
+    to?: number | null;
+};
+
 const Products = () => {
     const [searchParams] = useSearchParams();
-    const sortType = (searchParams.get('sort') as SortType) || 'all';
+    const params = {
+        type: searchParams.get('sort'),
+        from: searchParams.get('from'),
+        to: searchParams.get('to'),
+    } as FilterType;
     const { data: products, isLoading } =
-        productApi.useGetSortedProductsQuery(sortType);
+        productApi.useGetSortedProductsQuery(params);
 
     return (
         <div className={styles.products}>
