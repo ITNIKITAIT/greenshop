@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import router from './routes/main';
-var cors = require('cors');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
