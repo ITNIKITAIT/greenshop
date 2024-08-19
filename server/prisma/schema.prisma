@@ -13,12 +13,81 @@ datasource db {
 //   directUrl = env("POSTGRES_URL_NON_POOLING")
 // }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  role     UserRole @default(USER)
+
+  orders           Order[]
+  verificationCode VerificationCode?
+
+  createdAt DateTime @default(now())
+}
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   description String?
-  price       Float
   sale        Float?
-  createdAt   DateTime @default(now())
+  price       Float
+  rating      Float   @default(0)
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[]
+}
+
+enum OrderStatus {
+  PENDING
+  SUCCEEDED
+  CANCELLED
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  totalAmount Int
+  status      OrderStatus
+  paymentId   String?
+
+  items Json
+
+  fullName String
+  email    String
+  country  String
+  city     String
+  addrress String
+  zip      String
+  comment  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationCode {
+  id Int @id @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
+
+  code String
+
+  createdAt DateTime @default(now())
 }
