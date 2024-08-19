@@ -1,8 +1,13 @@
-const Category = () => {
+interface Props {
+    title: string;
+    amount: number;
+}
+
+const Category = ({ title, amount }: Props) => {
     return (
         <li>
-            House Plants
-            <span>(33)</span>
+            {title}
+            <span>({amount})</span>
         </li>
     );
 };

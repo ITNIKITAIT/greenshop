@@ -42,6 +42,10 @@
 .price {
     margin-left: 10px;
 
+    &__title {
+        margin-top: 40px;
+    }
+
     &__slider {
         height: 10px;
         width: 100%;

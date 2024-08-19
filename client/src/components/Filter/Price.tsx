@@ -35,7 +35,7 @@ const Price = () => {
 
     return (
         <>
-            <h3>Price range</h3>
+            <h3 className={styles.price__title}>Price range</h3>
             <div className={styles.price}>
                 <Slider
                     range
