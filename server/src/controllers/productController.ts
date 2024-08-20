@@ -37,6 +37,25 @@ class ProductController {
             console.log(e);
         }
     }
+
+    async getQueryProducts(req: Request, res: Response) {
+        const query = req.query.q || '';
+
+        try {
+            const products = await prisma.product.findMany({
+                where: {
+                    name: {
+                        contains: query as string,
+                        mode: 'insensitive',
+                    },
+                },
+                take: 5,
+            });
+            res.json(products);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new ProductController();
