@@ -30,5 +30,8 @@ export const productApi = createApi({
         getReletedProducts: builder.query<IProduct[], void>({
             query: () => '/releted',
         }),
+        getProductBySearch: builder.query<IProduct[], string>({
+            query: (q) => `/search?q=${q}`,
+        }),
     }),
 });

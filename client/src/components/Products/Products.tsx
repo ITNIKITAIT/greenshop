@@ -8,8 +8,12 @@ import { useSearchParams } from 'react-router-dom';
 export interface IProduct {
     id: number;
     name: string;
+    description: string | null;
+    sale: number | null;
     price: number;
-    sale: null | number;
+    rating: number;
+    categoryId: number;
+    createdAt: Date;
 }
 
 export type FilterType = {

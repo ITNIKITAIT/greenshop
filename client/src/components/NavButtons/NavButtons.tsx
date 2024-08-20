@@ -1,5 +1,4 @@
 import styles from './navButtons.module.scss';
-import { FiSearch } from 'react-icons/fi';
 import { IoCartOutline } from 'react-icons/io5';
 import { TbLogin2 } from 'react-icons/tb';
 import { useAppSelector } from '../../store/store';
@@ -8,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { SHOPPING_CART_ROUTE } from '../../utils/consts';
 import { useState } from 'react';
 import Authorization from '../Authorization/Authorization';
+import SearchInput from './SearchInput';
 
 const NavButtons = () => {
     const amount = useAppSelector(amountProducts);
@@ -17,7 +17,7 @@ const NavButtons = () => {
 
     return (
         <div className={styles.nav__buttons}>
-            <FiSearch className={styles.searchIcon} />
+            <SearchInput />
             <div
                 style={{ position: 'relative' }}
                 onClick={() => navigate(SHOPPING_CART_ROUTE)}>

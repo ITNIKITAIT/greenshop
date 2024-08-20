@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import styles from './products.module.scss';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useSearchParams } from 'react-router-dom';
+import useFilters from '../../hooks/useFilters';
 
 export type SortType = 'all' | 'new' | 'sale';
 
 const Sort = () => {
-    const [sortType, setSortType] = useState<SortType>('all');
     const [searchParams, setSearchParams] = useSearchParams();
+    const { sortType, setSortType } = useFilters();
 
     const sortOptions: { type: SortType; content: string }[] = [
         { type: 'all', content: 'All Plants' },
