@@ -56,6 +56,19 @@ class ProductController {
             console.log(e);
         }
     }
+
+    async getCategory(req: Request, res: Response) {
+        try {
+            const categories = await prisma.category.findMany({
+                include: {
+                    _count: true,
+                },
+            });
+            res.json(categories);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new ProductController();

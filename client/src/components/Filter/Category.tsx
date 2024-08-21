@@ -1,13 +1,15 @@
-interface Props {
-    title: string;
-    amount: number;
+export interface ICategory {
+    name: string;
+    _count: {
+        products: number;
+    };
 }
 
-const Category = ({ title, amount }: Props) => {
+const Category = ({ name, _count }: ICategory) => {
     return (
         <li>
-            {title}
-            <span>({amount})</span>
+            {name}
+            <span>({_count.products})</span>
         </li>
     );
 };

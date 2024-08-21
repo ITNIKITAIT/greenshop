@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../utils/consts';
 import { FilterType, IProduct } from '../components/Products/Products';
+import { ICategory } from '../components/Filter/Category';
 
 export const productApi = createApi({
     reducerPath: 'productApi',
@@ -32,6 +33,9 @@ export const productApi = createApi({
         }),
         getProductBySearch: builder.query<IProduct[], string>({
             query: (q) => `/search?q=${q}`,
+        }),
+        getCategory: builder.query<ICategory[], void>({
+            query: () => `/category`,
         }),
     }),
 });
