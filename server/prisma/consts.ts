@@ -22,3 +22,29 @@ export const products = [
     { name: 'Chinese Evergreen', price: 39, categoryId: 1 },
     { name: "Bird's Nest Fern", price: 99, categoryId: 1 },
 ];
+
+export const carts = [
+    {
+        userId: 1,
+        token: '111111',
+    },
+    { userId: 2, token: '222222' },
+];
+
+export const cartItems = [
+    {
+        productId: 1,
+        cartId: 1,
+        quantity: 1,
+    },
+    {
+        productId: 2,
+        cartId: 1,
+        quantity: 5,
+    },
+    {
+        productId: 2,
+        cartId: 2,
+        quantity: 3,
+    },
+];

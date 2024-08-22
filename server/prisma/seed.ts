@@ -1,6 +1,6 @@
 import prisma from './prisma';
 import { hashSync } from 'bcrypt';
-import { categories, products } from './consts';
+import { cartItems, carts, categories, products } from './consts';
 
 async function up() {
     await prisma.user.createMany({
@@ -21,11 +21,15 @@ async function up() {
 
     await prisma.category.createMany({ data: categories });
     await prisma.product.createMany({ data: products });
+    await prisma.cart.createMany({ data: carts });
+    await prisma.cartItem.createMany({ data: cartItems });
 }
 async function down() {
     await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
     await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
     await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
+    await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
 }
 async function main() {
     try {
