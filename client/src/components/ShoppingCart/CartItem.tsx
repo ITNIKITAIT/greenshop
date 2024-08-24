@@ -10,18 +10,23 @@ import { withDiscount } from '../../utils/discountFunc';
 import { useAppDispatch } from '../../store/store';
 import { getProductRoute } from '../../utils/consts';
 import { useNavigate } from 'react-router-dom';
+import { cartApi } from '../../api/cartApi';
 
 const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    const [updateCart] = cartApi.useUpdateCartMutation();
+
     const handleMinus = () => {
         if (quantity !== 1) {
             dispatch(deleteOneProduct(id));
+            updateCart({ id, quantity: quantity - 1 });
         }
     };
     const handlePlus = () => {
         dispatch(addOneProduct(id));
+        updateCart({ id, quantity: quantity + 1 });
     };
 
     return (

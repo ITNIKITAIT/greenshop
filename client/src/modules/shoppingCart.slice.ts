@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IProduct } from '../components/Products/Products';
 import { withDiscount } from '../utils/discountFunc';
-import fetchCart from './test';
+import fetchCart from './fetchCart';
 
 export interface ICart {
     items: ICartItem[];
@@ -9,18 +9,17 @@ export interface ICart {
 
 export interface ICartItem extends IProduct {
     quantity: number;
-    product?: IProduct;
 }
 
 interface shoppingCartState extends ICart {
     loading: boolean;
-    error: String;
+    error: boolean;
 }
 
 const initialState: shoppingCartState = {
     items: [],
     loading: true,
-    error: 'null',
+    error: false,
 };
 
 export const shoppingCartSlice = createSlice({
@@ -90,7 +89,7 @@ export const shoppingCartSlice = createSlice({
             })
             .addCase(fetchCart.rejected, (state) => {
                 state.loading = false;
-                state.error = 'error';
+                state.error = true;
             });
     },
 });

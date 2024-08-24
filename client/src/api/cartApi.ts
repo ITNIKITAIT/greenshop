@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../utils/consts';
-import { ICart } from '../modules/shoppingCart.slice';
+import { CartDTO } from '../utils/cartDetails';
 
 export const cartApi = createApi({
     reducerPath: 'cartApi',
@@ -9,8 +9,17 @@ export const cartApi = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
-        getCart: builder.query<ICart, void>({
+        getCart: builder.query<CartDTO, void>({
             query: () => `/`,
         }),
+        updateCart: builder.mutation<CartDTO, { id: number; quantity: number }>(
+            {
+                query: ({ id, quantity }) => ({
+                    url: `/${id}`,
+                    method: 'PATCH',
+                    body: { quantity },
+                }),
+            }
+        ),
     }),
 });

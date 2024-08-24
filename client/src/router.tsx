@@ -16,14 +16,14 @@ import { productApi } from './api/productApi';
 import { store } from './store/store';
 import Root from './pages/Root';
 import RootShop from './pages/RootShop';
-// import fetchCart from './modules/test';
+import fetchCart from './modules/fetchCart';
 
 export const router = createBrowserRouter([
     {
         path: HOME_ROUTE,
         element: <Root />,
         errorElement: <NotFoundPage />,
-        // loader: async () => store.dispatch(fetchCart()),
+        loader: async () => store.dispatch(fetchCart()),
         children: [
             {
                 index: true,
