@@ -2,14 +2,18 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import shoppingCartReducer from '../modules/shoppingCart.slice';
 import { productApi } from '../api/productApi';
+import { cartApi } from '../api/cartApi';
 
 export const store = configureStore({
     reducer: {
         shoppingCart: shoppingCartReducer,
         [productApi.reducerPath]: productApi.reducer,
+        [cartApi.reducerPath]: cartApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(productApi.middleware),
+        getDefaultMiddleware()
+            .concat(productApi.middleware)
+            .concat(cartApi.middleware),
 });
 
 export type AppState = ReturnType<typeof store.getState>;

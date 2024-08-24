@@ -1,4 +1,3 @@
-import Header from '../components/Header/Header';
 import Shop from '../components/Shop/Shop';
 import Footer from '../components/Footer/Footer';
 import Hero from '../components/Hero/Hero';
@@ -6,7 +5,6 @@ import Hero from '../components/Hero/Hero';
 const HomePage = () => {
     return (
         <>
-            <Header />
             <Hero />
             <Shop />
             <Footer />

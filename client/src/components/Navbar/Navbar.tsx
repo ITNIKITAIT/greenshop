@@ -1,18 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
 import styles from './navbar.module.scss';
 import { HOME_ROUTE, SHOP_ROUTE } from '../../utils/consts';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type Page = 'home' | 'shop';
 
 const Navbar = () => {
     const [currPage, setCurrPage] = useState<Page>('home');
     const location = useLocation();
-    const pathnames = location.pathname.split('/');
+    const isShop = useMemo(
+        () => location.pathname.split('/').includes('shop'),
+        [location]
+    );
 
     useEffect(() => {
-        if (pathnames.includes('shop')) setCurrPage('shop');
-    }, [location]);
+        if (isShop) setCurrPage('shop');
+        else setCurrPage('home');
+    }, [isShop]);
 
     return (
         <div className={styles.navbar}>

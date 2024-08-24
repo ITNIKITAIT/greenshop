@@ -1,16 +1,27 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IProduct } from '../components/Products/Products';
 import { withDiscount } from '../utils/discountFunc';
+import fetchCart from './test';
+
+export interface ICart {
+    items: ICartItem[];
+}
 
 export interface ICartItem extends IProduct {
     quantity: number;
+    product?: IProduct;
 }
 
-type shoppingCartState = {
-    items: ICartItem[];
-};
+interface shoppingCartState extends ICart {
+    loading: boolean;
+    error: String;
+}
 
-const initialState: shoppingCartState = { items: [] };
+const initialState: shoppingCartState = {
+    items: [],
+    loading: true,
+    error: 'null',
+};
 
 export const shoppingCartSlice = createSlice({
     name: 'shoppingCart',
@@ -67,6 +78,20 @@ export const shoppingCartSlice = createSlice({
         resetProducts: (state, action) => {
             state.items = [];
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCart.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchCart.fulfilled, (state, action) => {
+                state.loading = false;
+                state.items = action.payload.items;
+            })
+            .addCase(fetchCart.rejected, (state) => {
+                state.loading = false;
+                state.error = 'error';
+            });
     },
 });
 

@@ -14,33 +14,49 @@ import ShoppingCartPage from './pages/ShoppingCartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import { productApi } from './api/productApi';
 import { store } from './store/store';
+import Root from './pages/Root';
+import RootShop from './pages/RootShop';
+// import fetchCart from './modules/test';
 
 export const router = createBrowserRouter([
     {
         path: HOME_ROUTE,
-        element: <HomePage />,
+        element: <Root />,
         errorElement: <NotFoundPage />,
-    },
-    {
-        path: SHOP_ROUTE,
-        element: <ShopPage />,
-        loader: async () => {
-            store.dispatch(
-                productApi.util.prefetch('getSortedProducts', {}, {})
-            );
-            return null;
-        },
-    },
-    {
-        path: PRODUCT_ROUTE,
-        element: <ProductPage />,
-    },
-    {
-        path: SHOPPING_CART_ROUTE,
-        element: <ShoppingCartPage />,
-    },
-    {
-        path: CHECKOUT_ROUTE,
-        element: <CheckoutPage />,
+        // loader: async () => store.dispatch(fetchCart()),
+        children: [
+            {
+                index: true,
+                element: <HomePage />,
+            },
+            {
+                path: SHOP_ROUTE,
+                element: <RootShop />,
+                loader: async () => {
+                    store.dispatch(
+                        productApi.util.prefetch('getSortedProducts', {}, {})
+                    );
+                    return null;
+                },
+                children: [
+                    {
+                        index: true,
+                        element: <ShopPage />,
+                    },
+                    {
+                        path: SHOPPING_CART_ROUTE,
+                        element: <ShoppingCartPage />,
+                    },
+                    {
+                        path: PRODUCT_ROUTE,
+                        element: <ProductPage />,
+                    },
+                    {
+                        path: CHECKOUT_ROUTE,
+                        element: <CheckoutPage />,
+                    },
+                ],
+            },
+        ],
     },
 ]);

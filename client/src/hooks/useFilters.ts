@@ -21,7 +21,7 @@ const useFilters = () => {
         (searchParams.get('sort') as SortType) || 'all'
     );
 
-    return { prices, setPrices, sortType, setSortType };
+    return { prices, setPrices, sortType, setSortType, setSearchParams };
 };
 
 export default useFilters;

@@ -2,14 +2,12 @@ import styles from './filter.module.scss';
 import './custom-slider.scss';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
-import { useSearchParams } from 'react-router-dom';
 import useFilters from '../../hooks/useFilters';
 
 type RangePrice = [number, number];
 
 const Price = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { prices, setPrices } = useFilters();
+    const { prices, setPrices, setSearchParams } = useFilters();
 
     const handleChange = (values: number[] | number) => {
         setPrices(values as RangePrice);

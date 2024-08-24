@@ -10,7 +10,8 @@ const SearchInput = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [focused, setFocused] = useState<Boolean>(false);
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useClickAway(ref, () => {
         setFocused(false);
@@ -19,6 +20,11 @@ const SearchInput = () => {
     const onClickItem = () => {
         setFocused(false);
         setSearchQuery('');
+    };
+
+    const onClickIcon = () => {
+        setFocused(true);
+        if (inputRef.current) inputRef.current.focus();
     };
 
     const { data: products } =
@@ -34,14 +40,12 @@ const SearchInput = () => {
                         focused && styles.searchInputFocus
                     }`}
                     value={searchQuery}
+                    ref={inputRef}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     type="text"
                 />
 
-                <FiSearch
-                    onClick={() => setFocused(true)}
-                    className={styles.searchIcon}
-                />
+                <FiSearch onClick={onClickIcon} className={styles.searchIcon} />
 
                 <div
                     className={`${styles.searchList} ${
