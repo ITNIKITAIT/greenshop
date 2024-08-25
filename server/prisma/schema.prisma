@@ -98,8 +98,8 @@ model VerificationCode {
 model Cart {
   id Int @id @default(autoincrement())
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int  @unique
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @unique
 
   items CartItem[]
 
