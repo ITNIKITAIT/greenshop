@@ -5,7 +5,6 @@ export const findOrCreateCart = async (
     token: string,
     userId?: number
 ): Promise<Cart> => {
-    console.log(token);
     let cart = await prisma.cart.findFirst({
         where: {
             token,

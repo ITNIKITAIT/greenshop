@@ -2,12 +2,16 @@ import { useState } from 'react';
 import styles from './product.module.scss';
 import { BsHeart } from 'react-icons/bs';
 import { IProduct } from '../Products/Products';
-import { useAppDispatch } from '../../store/store';
-import { addProduct } from '../../modules/shoppingCart.slice';
+import { cartApi } from '../../api/cartApi';
 
 const ProductButtons = (product: IProduct) => {
     const [count, setCount] = useState<number>(1);
-    const dispatch = useAppDispatch();
+
+    const [AddCartItem] = cartApi.useAddCartItemMutation();
+
+    const handleAddItem = () => {
+        AddCartItem({ ...product, quantity: count });
+    };
 
     const handleMinus = () => {
         if (count !== 1) setCount(count - 1);
@@ -31,9 +35,7 @@ const ProductButtons = (product: IProduct) => {
                 </button>
                 <button
                     className={'white-btn ' + styles.btnAdd}
-                    onClick={() =>
-                        dispatch(addProduct({ ...product, quantity: count }))
-                    }>
+                    onClick={handleAddItem}>
                     ADD TO CART
                 </button>
                 <button className={'white-btn ' + styles.btnFavorite}>

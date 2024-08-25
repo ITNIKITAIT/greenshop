@@ -7,8 +7,10 @@ import { BsHeart } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { getProductRoute } from '../../utils/consts';
 import { useAppDispatch } from '../../store/store';
-import { addProduct } from '../../modules/shoppingCart.slice';
 import { withDiscount } from '../../utils/discountFunc';
+import { cartApi } from '../../api/cartApi';
+import { MouseEvent } from 'react';
+import toast from 'react-hot-toast';
 
 interface Props {
     product: IProduct;
@@ -19,6 +21,14 @@ const ProductCard = ({ product }: Props) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
+    const [addCartItem] = cartApi.useAddCartItemMutation();
+
+    const addToCart = (e: MouseEvent) => {
+        e.stopPropagation();
+        addCartItem({ ...product, quantity: 1 });
+        toast.success('Added to cart');
+    };
+
     return (
         <div className={styles.product}>
             <div
@@ -26,11 +36,7 @@ const ProductCard = ({ product }: Props) => {
                 onClick={() => navigate(getProductRoute(id))}>
                 <img src="/img/flowers.png" alt="" />
                 <div className={styles.product__buttons}>
-                    <div
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            dispatch(addProduct({ ...product, quantity: 1 }));
-                        }}>
+                    <div onClick={addToCart}>
                         <IoCartOutline className={styles.product__icons} />
                     </div>
                     <div>

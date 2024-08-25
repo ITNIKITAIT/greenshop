@@ -12,7 +12,6 @@ import {
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import ShoppingCartPage from './pages/ShoppingCartPage';
 import CheckoutPage from './pages/CheckoutPage';
-import { productApi } from './api/productApi';
 import { store } from './store/store';
 import Root from './pages/Root';
 import RootShop from './pages/RootShop';
@@ -32,12 +31,6 @@ export const router = createBrowserRouter([
             {
                 path: SHOP_ROUTE,
                 element: <RootShop />,
-                loader: async () => {
-                    store.dispatch(
-                        productApi.util.prefetch('getSortedProducts', {}, {})
-                    );
-                    return null;
-                },
                 children: [
                     {
                         index: true,

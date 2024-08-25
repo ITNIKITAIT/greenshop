@@ -77,9 +77,7 @@ class CartController {
         try {
             if (!token) {
                 token = crypto.randomUUID();
-                console.log('token change');
             }
-            console.log(token);
             const userCart = await findOrCreateCart(token);
 
             const cartItem = await prisma.cartItem.findFirst({

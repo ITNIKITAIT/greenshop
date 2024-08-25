@@ -46,36 +46,36 @@ export const shoppingCartSlice = createSlice({
     },
     reducers: {
         addProduct: (state, action: PayloadAction<ICartItem>) => {
-            const product = action.payload;
-            const existingProduct = state.items.find(
-                (item) => item.id === product.id
-            );
-            if (existingProduct) existingProduct.quantity += product.quantity;
-            else state.items.push(product);
+            // const product = action.payload;
+            // const existingProduct = state.items.find(
+            //     (item) => item.id === product.id
+            // );
+            // if (existingProduct) existingProduct.quantity += product.quantity;
+            // else state.items.push(product);
         },
         addOneProduct: (state, action: PayloadAction<number>) => {
-            const id = action.payload;
-            const currProduct = state.items.find(
-                (item) => item.id === id
-            ) as ICartItem;
-            currProduct.quantity += 1;
+            // const id = action.payload;
+            // const currProduct = state.items.find(
+            //     (item) => item.id === id
+            // ) as ICartItem;
+            // currProduct.quantity += 1;
         },
         deleteFullProduct: (state, action: PayloadAction<number>) => {
-            const id = action.payload;
-            state.items.splice(
-                state.items.findIndex((item) => item.id === id),
-                1
-            );
+            // const id = action.payload;
+            // state.items.splice(
+            //     state.items.findIndex((item) => item.id === id),
+            //     1
+            // );
         },
         deleteOneProduct: (state, action: PayloadAction<number>) => {
-            const id = action.payload;
-            const currProduct = state.items.find(
-                (item) => item.id === id
-            ) as ICartItem;
-            currProduct.quantity -= 1;
+            // const id = action.payload;
+            // const currProduct = state.items.find(
+            //     (item) => item.id === id
+            // ) as ICartItem;
+            // currProduct.quantity -= 1;
         },
         resetProducts: (state, action) => {
-            state.items = [];
+            // state.items = [];
         },
     },
     extraReducers: (builder) => {

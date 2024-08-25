@@ -1,32 +1,28 @@
 import styles from './shoppingCart.module.scss';
 import { AiOutlineDelete } from 'react-icons/ai';
-import {
-    ICartItem,
-    addOneProduct,
-    deleteFullProduct,
-    deleteOneProduct,
-} from '../../modules/shoppingCart.slice';
+import { ICartItem } from '../../modules/shoppingCart.slice';
 import { withDiscount } from '../../utils/discountFunc';
-import { useAppDispatch } from '../../store/store';
 import { getProductRoute } from '../../utils/consts';
 import { useNavigate } from 'react-router-dom';
 import { cartApi } from '../../api/cartApi';
 
 const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [updateCart] = cartApi.useUpdateCartMutation();
+    const [deleteCartItem] = cartApi.useDeleteCartItemMutation();
 
     const handleMinus = () => {
         if (quantity !== 1) {
-            dispatch(deleteOneProduct(id));
             updateCart({ id, quantity: quantity - 1 });
         }
     };
     const handlePlus = () => {
-        dispatch(addOneProduct(id));
         updateCart({ id, quantity: quantity + 1 });
+    };
+
+    const handleDelete = () => {
+        deleteCartItem(id);
     };
 
     return (
@@ -60,7 +56,7 @@ const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
             </div>
             <div>
                 <AiOutlineDelete
-                    onClick={() => dispatch(deleteFullProduct(id))}
+                    onClick={handleDelete}
                     className={styles.bin}
                 />
             </div>

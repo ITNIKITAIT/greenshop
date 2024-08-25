@@ -22,7 +22,11 @@ const NavButtons = () => {
                 style={{ position: 'relative' }}
                 onClick={() => navigate(SHOPPING_CART_ROUTE)}>
                 <IoCartOutline className={styles.cartIcon} />
-                <span className={styles.cartCounter}>{amount}</span>
+                {amount ? (
+                    <span className={styles.cartCounter}>{amount}</span>
+                ) : (
+                    ''
+                )}
             </div>
             <button
                 onClick={() => setAuth(true)}
