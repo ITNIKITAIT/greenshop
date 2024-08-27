@@ -1,27 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { SortType } from '../components/Products/Sort';
+import { getSearchParams } from '../utils/getSearchParams';
 
 type RangePrice = [number, number];
 
 const useFilters = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [prices, setPrices] = useState<RangePrice>(getDefaultPrice());
+    const { from, to, type, category, sortBy } = getSearchParams(searchParams);
 
-    function getDefaultPrice() {
-        let defaultValue: RangePrice = [0, 1230];
-        const [from, to] = [searchParams.get('from'), searchParams.get('to')];
-        if (from && to) {
-            defaultValue = [parseInt(from), parseInt(to)];
-        }
-        return defaultValue;
-    }
+    const [prices, setPrices] = useState<RangePrice>([from, to]);
+    const [sortType, setSortType] = useState<string>(type);
 
-    const [sortType, setSortType] = useState<SortType>(
-        (searchParams.get('sort') as SortType) || 'all'
-    );
+    useEffect(() => {
+        setPrices([from, to]);
+        setSortType(type);
+    }, [searchParams]);
 
-    return { prices, setPrices, sortType, setSortType, setSearchParams };
+    return {
+        prices,
+        setPrices,
+        sortType,
+        setSortType,
+        category,
+        setSearchParams,
+    };
 };
 
 export default useFilters;

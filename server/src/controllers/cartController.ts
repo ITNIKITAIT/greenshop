@@ -106,7 +106,7 @@ class CartController {
                 });
             }
             res.cookie('cartToken', token);
-            res.send('Success');
+            res.json('Success');
         } catch (e) {
             console.log(e);
         }

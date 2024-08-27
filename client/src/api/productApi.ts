@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../utils/consts';
-import { FilterType, IProduct } from '../components/Products/Products';
+import { IProduct } from '../components/Products/Products';
 import { ICategory } from '../components/Filter/Category';
+import { IFilter } from '../utils/getSearchParams';
+// import { GetSearchParams } from '../utils/getSearchParams';
 
 export const productApi = createApi({
     reducerPath: 'productApi',
@@ -10,18 +12,13 @@ export const productApi = createApi({
         getAllProducts: builder.query<IProduct[], void>({
             query: () => `/`,
         }),
-        getSortedProducts: builder.query<IProduct[], FilterType>({
-            query: ({ type, from, to }) => {
-                let queryParams = `?`;
-                if (type) {
-                    queryParams += `&sort=${type}`;
-                }
-                if (from) {
-                    queryParams += `&from=${from}`;
-                }
-                if (to) {
-                    queryParams += `&to=${to}`;
-                }
+        getSortedProducts: builder.query<IProduct[], IFilter>({
+            query: ({ type, from, to, category, sortBy }) => {
+                let queryParams = `?type=${type}&from=${from}&to=${to}`;
+
+                if (category) queryParams += `&category=${category}`;
+                if (sortBy) queryParams += `&sortBy=${sortBy}`;
+
                 return queryParams;
             },
         }),

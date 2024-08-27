@@ -9,7 +9,7 @@ import { getProductRoute } from '../../utils/consts';
 import { useAppDispatch } from '../../store/store';
 import { withDiscount } from '../../utils/discountFunc';
 import { cartApi } from '../../api/cartApi';
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -21,13 +21,17 @@ const ProductCard = ({ product }: Props) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const [addCartItem] = cartApi.useAddCartItemMutation();
+    const [addCartItem, result] = cartApi.useAddCartItemMutation();
 
-    const addToCart = (e: MouseEvent) => {
+    const addToCart = async (e: MouseEvent) => {
         e.stopPropagation();
         addCartItem({ ...product, quantity: 1 });
-        toast.success('Added to cart');
     };
+
+    useEffect(() => {
+        if (result.isError) toast.error('Failed to add to cart');
+        if (result.isSuccess) toast.success('Added to cart');
+    }, [result]);
 
     return (
         <div className={styles.product}>

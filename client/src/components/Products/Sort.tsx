@@ -15,7 +15,7 @@ const Sort = () => {
 
     const handleType = (type: SortType) => {
         setSearchParams((params) => {
-            params.set('sort', type);
+            params.set('type', type);
             return params;
         });
         setSortType(type);
@@ -36,7 +36,7 @@ const Sort = () => {
                 ))}
             </ul>
             <div>
-                Short by:{' '}
+                Sort by:{' '}
                 <span>
                     Default sorting{' '}
                     <MdKeyboardArrowDown style={{ height: 'fit-content' }} />

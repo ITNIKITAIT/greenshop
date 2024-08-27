@@ -1,22 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './product.module.scss';
 import { BsHeart } from 'react-icons/bs';
 import { IProduct } from '../Products/Products';
 import { cartApi } from '../../api/cartApi';
+import toast from 'react-hot-toast';
 
 const ProductButtons = (product: IProduct) => {
     const [count, setCount] = useState<number>(1);
 
-    const [AddCartItem] = cartApi.useAddCartItemMutation();
+    const [addCartItem, result] = cartApi.useAddCartItemMutation();
 
     const handleAddItem = () => {
-        AddCartItem({ ...product, quantity: count });
+        addCartItem({ ...product, quantity: count });
     };
 
     const handleMinus = () => {
         if (count !== 1) setCount(count - 1);
     };
     const handlePlus = () => setCount(count + 1);
+
+    useEffect(() => {
+        if (result.isError) toast.error('Failed to add to cart');
+        if (result.isSuccess) toast.success('Added to cart');
+    }, [result]);
 
     return (
         <div className={styles.product__buttons}>

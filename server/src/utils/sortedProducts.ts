@@ -1,63 +1,34 @@
 import prisma from '../../prisma/prisma';
 
-export const sortedProducts = async (type: any, from: any, to: any) => {
-    const minPrice = parseFloat(from);
-    const maxPrice = parseFloat(to);
+export interface SearchParams {
+    type?: string;
+    from?: number;
+    to?: number;
+    sortBy?: string;
+    category?: string;
+    page?: string;
+}
 
-    if (from && to) {
-        switch (type) {
-            case 'new':
-                return await prisma.product.findMany({
-                    orderBy: {
-                        createdAt: 'desc',
-                    },
-                    where: {
-                        price: {
-                            gte: minPrice,
-                            lte: maxPrice,
-                        },
-                    },
-                });
-            case 'all':
-                return await prisma.product.findMany({
-                    where: {
-                        price: {
-                            gte: minPrice,
-                            lte: maxPrice,
-                        },
-                    },
-                });
-            case 'sale':
-                return await prisma.product.findMany({
-                    where: {
-                        sale: {
-                            not: null,
-                        },
-                        price: {
-                            gte: minPrice,
-                            lte: maxPrice,
-                        },
-                    },
-                });
-        }
-    } else {
-        switch (type) {
-            case 'all':
-                return await prisma.product.findMany();
-            case 'new':
-                return await prisma.product.findMany({
-                    orderBy: {
-                        createdAt: 'desc',
-                    },
-                });
-            case 'sale':
-                return await prisma.product.findMany({
-                    where: {
-                        sale: {
-                            not: null,
-                        },
-                    },
-                });
-        }
-    }
+export const sortedProducts = async (params: SearchParams) => {
+    const type = params.type;
+    const minPrice = Number(params.from);
+    const maxPrice = Number(params.to);
+    const category = params.category;
+
+    const products = await prisma.product.findMany({
+        where: {
+            price: {
+                gte: minPrice,
+                lte: maxPrice,
+            },
+            sale: {
+                not: type === 'sale' ? null : undefined,
+            },
+            category: {
+                name: category,
+            },
+        },
+    });
+
+    return products;
 };

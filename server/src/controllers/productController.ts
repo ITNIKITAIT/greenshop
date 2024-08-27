@@ -4,11 +4,8 @@ import { sortedProducts } from '../utils/sortedProducts';
 
 class ProductController {
     async getProducts(req: Request, res: Response) {
-        const type = req.query.sort || 'all';
-        const from = req.query.from;
-        const to = req.query.to;
         try {
-            const products = await sortedProducts(type, from, to);
+            const products = await sortedProducts(req.query);
             res.json(products);
         } catch (e) {
             console.log(e);
