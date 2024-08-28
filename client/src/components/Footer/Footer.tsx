@@ -25,7 +25,7 @@ const Footer = () => {
                         +88 01911 717 490
                     </p>
                 </div>
-                <h3>© 2021 GreenShop. All Rights Reserved.</h3>
+                <h3>© 2024 GreenShop. All Rights Reserved.</h3>
             </div>
         </footer>
     );

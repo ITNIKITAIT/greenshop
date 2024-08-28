@@ -1,25 +1,15 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useFormContext } from 'react-hook-form';
 import styles from './checkout.module.scss';
-
-type Inputs = {
-    firstName: string;
-    lastName: string;
-    country: string;
-    town: string;
-    streetAddress: string;
-    zip: string;
-    email: string;
-    notes: string;
-};
+import CheckoutInput from './CheckoutFormInput';
 
 interface Props {
     setModal: (modal: boolean) => void;
 }
 
 const CheckoutForm = ({ setModal }: Props) => {
-    const { handleSubmit, register } = useForm<Inputs>();
+    const { handleSubmit, register } = useFormContext();
 
-    const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
         console.log(data);
         setModal(true);
     };
@@ -27,91 +17,26 @@ const CheckoutForm = ({ setModal }: Props) => {
     return (
         <div>
             <h2 className={styles.title}>Billing Address</h2>
-            <form id="main-form" onSubmit={handleSubmit(onSubmit)}>
-                <label>
-                    <p>
-                        First Name
-                        <span>*</span>
-                    </p>
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        {...register('firstName')}
-                    />
-                </label>
-                <label>
-                    <p>
-                        Last Name
-                        <span>*</span>
-                    </p>
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        {...register('lastName')}
-                    />
-                </label>
-                <label>
-                    <p>
-                        Country / Region
-                        <span>*</span>
-                    </p>
-                    <input
-                        placeholder="Select a country / region"
-                        type="text"
-                        autoComplete="off"
-                        {...register('country')}
-                    />
-                </label>
-                <label>
-                    <p>
-                        Town / City
-                        <span>*</span>
-                    </p>
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        {...register('town')}
-                    />
-                </label>
-                <label>
-                    <p>
-                        Street Address
-                        <span>*</span>
-                    </p>
-                    <input
-                        placeholder="House number and street name"
-                        type="text"
-                        autoComplete="off"
-                        {...register('streetAddress')}
-                    />
-                </label>
-                <label>
-                    <p>
-                        Zip
-                        <span>*</span>
-                    </p>
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        {...register('zip')}
-                    />
-                </label>
-                <label>
-                    <p>
-                        Email
-                        <span>*</span>
-                    </p>
-                    <input
-                        type="email"
-                        autoComplete="off"
-                        {...register('email')}
-                    />
-                </label>
+            <form id="order-form" onSubmit={handleSubmit(onSubmit)}>
+                <CheckoutInput label="First name" value="firstName" />
+                <CheckoutInput label="Last name" value="lastName" />
+                <CheckoutInput
+                    label="Country / Region"
+                    value="country"
+                    placeholder="Select a country / region"
+                />
+                <CheckoutInput label="Town / City" value="town" />
+                <CheckoutInput
+                    label="Street Address"
+                    value="streetAddress"
+                    placeholder="House number and street name"
+                />
+                <CheckoutInput label="Zip" value="zip" />
+                <CheckoutInput label="Email" value="email" />
                 <label>
                     <p style={{ width: '400px' }}>Order notes (optional)</p>
                     <textarea className={styles.notes} {...register('notes')} />
                 </label>
-                {/* <button type="submit">Submit</button> */}
             </form>
         </div>
     );

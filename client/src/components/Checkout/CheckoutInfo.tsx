@@ -11,7 +11,7 @@ const CheckoutInfo = () => {
                 <TotalPrice />
                 <button
                     type="submit"
-                    form="main-form"
+                    form="order-form"
                     className={'green-btn ' + styles.orderBtn}>
                     Place Order
                 </button>
