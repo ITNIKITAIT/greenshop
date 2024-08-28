@@ -13,14 +13,14 @@ export const categories = [
 
 export const products = [
     { name: 'Barberton Daisy', price: 119, categoryId: 1 },
-    { name: 'Angel Wing Begonia', price: 169, categoryId: 1 },
-    { name: 'African Violet', price: 229, categoryId: 1, sale: 13 },
-    { name: 'Beach Spider Lily', price: 129, categoryId: 1 },
-    { name: 'Blushing Bromeliad', price: 139, categoryId: 1 },
+    { name: 'Angel Wing Begonia', price: 169, categoryId: 2 },
+    { name: 'African Violet', price: 229, categoryId: 2, sale: 13 },
+    { name: 'Beach Spider Lily', price: 129, categoryId: 4 },
+    { name: 'Blushing Bromeliad', price: 139, categoryId: 3 },
     { name: 'Aluminum Plant', price: 179, categoryId: 1 },
-    { name: 'Broadleaf Lady Palm', price: 59, categoryId: 1 },
-    { name: 'Chinese Evergreen', price: 39, categoryId: 1 },
-    { name: "Bird's Nest Fern", price: 99, categoryId: 1 },
+    { name: 'Broadleaf Lady Palm', price: 59, categoryId: 7 },
+    { name: 'Chinese Evergreen', price: 39, categoryId: 8 },
+    { name: "Bird's Nest Fern", price: 99, categoryId: 2 },
 ];
 
 export const carts = [

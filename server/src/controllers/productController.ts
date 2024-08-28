@@ -25,11 +25,45 @@ class ProductController {
         }
     }
     async getReletedProducts(req: Request, res: Response) {
+        const limit = 4;
+        const productId = Number(req.query.productId);
+
         try {
+            const currentProduct = await prisma.product.findFirst({
+                where: {
+                    id: productId,
+                },
+            });
+            if (!currentProduct) {
+                res.json({ error: "Product doesn't exist" });
+                return;
+            }
+
             const reletedProducts = await prisma.product.findMany({
+                where: {
+                    id: {
+                        not: productId,
+                    },
+                    categoryId: currentProduct.categoryId,
+                },
                 take: 4,
             });
-            res.json(reletedProducts);
+
+            if (reletedProducts.length < 5) {
+                const additionalProducts = await prisma.product.findMany({
+                    where: {
+                        id: {
+                            notIn: reletedProducts
+                                .map((p) => p.id)
+                                .concat([productId]),
+                        },
+                    },
+                    take: limit - reletedProducts.length,
+                });
+                res.json([...reletedProducts, ...additionalProducts]);
+            } else {
+                res.json(reletedProducts);
+            }
         } catch (e) {
             console.log(e);
         }
