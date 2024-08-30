@@ -25,8 +25,8 @@ export const productApi = createApi({
         getProductById: builder.query<IProduct, string>({
             query: (id) => `/${id}`,
         }),
-        getReletedProducts: builder.query<IProduct[], void>({
-            query: () => '/releted',
+        getReletedProducts: builder.query<IProduct[], string>({
+            query: (productId) => `/releted?productId=${productId}`,
         }),
         getProductBySearch: builder.query<IProduct[], string>({
             query: (q) => `/search?q=${q}`,

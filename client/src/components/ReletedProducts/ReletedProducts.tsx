@@ -2,10 +2,13 @@ import ProductCard from '../Products/ProductCard';
 import { IProduct } from '../Products/Products';
 import styles from './reletedProducts.module.scss';
 import { productApi } from '../../api/productApi';
+import { useParams } from 'react-router-dom';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 const ReletedProducts = () => {
+    const { productId } = useParams();
     const { data: reletedProducts, isLoading } =
-        productApi.useGetReletedProductsQuery();
+        productApi.useGetReletedProductsQuery(productId ?? skipToken);
 
     return (
         <div className="container">

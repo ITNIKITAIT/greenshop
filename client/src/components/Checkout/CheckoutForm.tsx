@@ -1,6 +1,9 @@
 import { FieldValues, SubmitHandler, useFormContext } from 'react-hook-form';
 import styles from './checkout.module.scss';
 import CheckoutInput from './CheckoutFormInput';
+import { orderApi } from '../../api/orderApi';
+import { useAppSelector } from '../../store/store';
+import { priceWithDelivery } from '../../modules/shoppingCart.slice';
 
 interface Props {
     setModal: (modal: boolean) => void;
@@ -8,10 +11,13 @@ interface Props {
 
 const CheckoutForm = ({ setModal }: Props) => {
     const { handleSubmit, register } = useFormContext();
+    const totalAmount = useAppSelector(priceWithDelivery);
+
+    const [createOrder] = orderApi.useCreateOrderMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
-        setModal(true);
+        createOrder({ ...data, totalAmount });
+        // setModal(true);
     };
 
     return (

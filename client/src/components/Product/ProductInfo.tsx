@@ -7,7 +7,7 @@ import { FaLinkedinIn } from 'react-icons/fa';
 import ProductButtons from './ProductButtons';
 
 const ProductInfo = (product: IProduct) => {
-    const { name, price, sale } = product;
+    const { name, price, sale, rating } = product;
     return (
         <div className={styles.product__description}>
             <h2>{name}</h2>
@@ -29,11 +29,18 @@ const ProductInfo = (product: IProduct) => {
                 </div>
                 <div>
                     <div className={styles.stars}>
-                        {[...Array(5)].map((_, i) => (
-                            <FaStar key={i} className={styles.starIcon} />
-                        ))}
+                        {[...Array(5)].map((_, i) =>
+                            rating >= i + 1 ? (
+                                <FaStar key={i} className={styles.starIcon} />
+                            ) : (
+                                <FaStar
+                                    key={i}
+                                    className={styles.unColoredIcon}
+                                />
+                            )
+                        )}
                     </div>
-                    19 Customer Review
+                    {rating} Customer Review
                 </div>
             </div>
             <div className={styles.product__section}>
@@ -44,15 +51,6 @@ const ProductInfo = (product: IProduct) => {
                     cylinder planters come with a wooden stand to help elevate
                     your plants off the ground.{' '}
                 </p>
-            </div>
-            <div className={styles.product__section}>
-                <h5>Size:</h5>
-                <ul className={styles.size__list}>
-                    <li>S</li>
-                    <li>M</li>
-                    <li>L</li>
-                    <li>XL</li>
-                </ul>
             </div>
             <ProductButtons {...product} />
             <div className={styles.product__info}>
