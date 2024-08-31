@@ -4,6 +4,7 @@ const PRODUCT_ROUTE: string = SHOP_ROUTE + '/product/:productId';
 const SHOPPING_CART_ROUTE: string = SHOP_ROUTE + '/shoppingCart';
 const CHECKOUT_ROUTE: string = SHOP_ROUTE + '/checkout';
 
+export const BASE_URL = 'http://localhost:3000';
 export const API_URL = 'http://localhost:5000/api';
 // export const API_URL = 'https://greenshop-api.onrender.com/api';
 

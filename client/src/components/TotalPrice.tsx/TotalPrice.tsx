@@ -10,14 +10,14 @@ const TotalPrice = () => {
         <div className={styles.totalPrice}>
             <ul>
                 <li>
-                    Subtotal<span>${price}.00</span>
+                    Subtotal<span>${price.toFixed(2)}</span>
                 </li>
                 <li>
-                    Shiping<span>${shipingPrice}.00</span>
+                    Shiping<span>${shipingPrice.toFixed(2)}</span>
                 </li>
             </ul>
             <div>
-                Total<span>${price + shipingPrice}.00</span>
+                Total<span>${(price + shipingPrice).toFixed(2)}</span>
             </div>
         </div>
     );

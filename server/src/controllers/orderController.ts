@@ -3,6 +3,7 @@ import prisma from '../../prisma/prisma';
 import { sendEmail } from '../utils/sendEmail';
 import { PayOrderTemplate } from '../email/emailTemplates/PayOrderTemplate';
 import { createPayment, stripe } from '../utils/createPayment';
+import { SuccesOrder } from '../email/emailTemplates/SuccesOrder';
 
 interface IOrder {
     firstName: string;
@@ -13,7 +14,8 @@ interface IOrder {
     streetAddress: string;
     zip: string;
     notes?: string;
-    totalAmount: number;
+    totalPrice: number;
+    deliveryPrice: number;
 }
 
 class OrderController {
@@ -59,19 +61,16 @@ class OrderController {
                     zip: data.zip,
                     comment: data.notes,
                     items: JSON.stringify(cart.items),
-                    totalAmount: data.totalAmount,
+                    totalAmount: data.totalPrice,
                 },
             });
 
-            // await prisma.cartItem.deleteMany({
-            //     where: {
-            //         cartId: cart.id,
-            //     },
-            // });
+            const session = await createPayment(
+                order,
+                cart.items,
+                data.deliveryPrice
+            );
 
-            const session = await createPayment(cart.items);
-            // TODO: do correct price and delivery ->
-            console.log(session);
             await prisma.order.update({
                 where: {
                     id: order.id,
@@ -84,13 +83,69 @@ class OrderController {
             await sendEmail(
                 data.email,
                 'Payment',
-                PayOrderTemplate(order.fullName, cart.items, data.totalAmount)
+                PayOrderTemplate(
+                    order.fullName,
+                    cart.items,
+                    data.totalPrice,
+                    data.deliveryPrice,
+                    session.url
+                )
             );
+
+            await prisma.cartItem.deleteMany({
+                where: {
+                    cartId: cart.id,
+                },
+            });
 
             res.json(session.url);
         } catch (e) {
             console.log(e);
         }
+    }
+    async updateOrder(req: Request, res: Response) {
+        const body = req.body;
+        switch (body.type) {
+            case 'checkout.session.completed':
+                const paymentIntent = body.data.object;
+                const order = paymentIntent.metadata;
+                await prisma.order.update({
+                    where: {
+                        id: Number(order.order_id),
+                    },
+                    data: {
+                        status: 'SUCCEEDED',
+                    },
+                });
+
+                await sendEmail(
+                    order.order_email,
+                    'Success',
+                    SuccesOrder(order)
+                );
+
+                break;
+            case 'payment_intent.payment_failed':
+                const paymentFailedIntent = body.data.object;
+                console.log('PaymentIntent failed:', paymentFailedIntent);
+                break;
+            default:
+                break;
+        }
+        try {
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getOrderByID(req: Request, res: Response) {
+        const { orderId } = req.params;
+        const order = await prisma.order.findFirst({
+            where: {
+                id: Number(orderId),
+            },
+        });
+        res.json(order);
     }
 }
 export default new OrderController();

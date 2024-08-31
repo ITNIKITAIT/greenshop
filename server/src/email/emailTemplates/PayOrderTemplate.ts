@@ -1,9 +1,12 @@
 import { CartItem, Product } from '@prisma/client';
+import { getPrice } from '../../utils/getPrice';
 
 export const PayOrderTemplate = (
     fullName: string,
     items: (CartItem & { product: Product })[],
-    total: number
+    totalPrice: number,
+    deliveryPrice: number,
+    paymentUrl: string
 ) => {
     return `
   <!DOCTYPE html>
@@ -105,26 +108,26 @@ export const PayOrderTemplate = (
             <tr>
                 <td>${item.product.name}</td>
                 <td>${item.quantity}</td>
-                <td>${item.product.price}</td>
+                <td>${getPrice(item.product.price, item.product.sale)}</td>
           </tr>`
               )
               .join('')}
             <tr>
                 <td>Delivery</td>
                 <td></td>
-                <td><strong>$9</strong></td>
+                <td><strong>$${deliveryPrice}</strong></td>
           </tr>
             <tr>
                 <td><strong>Total</strong></td>
                 <td></td>
-                <td><strong>$${total.toFixed(2)}</strong></td>
+                <td><strong>$${totalPrice.toFixed(2)}</strong></td>
             </tr>
         </table>
         
         <p>Please click the button below to proceed with your payment:</p>
         
         <div class="button-container">
-          <a href="https://www.youtube.com/" class="button">Pay Now</a>
+          <a href="${paymentUrl}" class="button">Pay Now</a>
         </div>
         
         <p>If you have any questions, feel free to contact our support team.</p>

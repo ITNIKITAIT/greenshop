@@ -3,22 +3,22 @@ import styles from './checkout.module.scss';
 import CheckoutInput from './CheckoutFormInput';
 import { orderApi } from '../../api/orderApi';
 import { useAppSelector } from '../../store/store';
-import { priceWithDelivery } from '../../modules/shoppingCart.slice';
+import {
+    amountProducts,
+    priceWithDelivery,
+} from '../../modules/shoppingCart.slice';
 
-interface Props {
-    setModal: (modal: boolean) => void;
-}
-
-const CheckoutForm = ({ setModal }: Props) => {
+const CheckoutForm = () => {
     const { handleSubmit, register } = useFormContext();
-    const totalAmount = useAppSelector(priceWithDelivery);
+    const totalPrice = useAppSelector(priceWithDelivery);
+    const deliveryPrice = useAppSelector(amountProducts) * 3;
 
     const [createOrder, result] = orderApi.useCreateOrderMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        createOrder({ ...data, totalAmount });
+        createOrder({ ...data, totalPrice, deliveryPrice });
     };
-    console.log(result.data);
+
     if (result.data) window.location.href = result.data;
 
     return (

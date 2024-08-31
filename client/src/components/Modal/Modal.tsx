@@ -1,25 +1,19 @@
-import {
-    priceWithDelivery,
-    resetProducts,
-} from '../../modules/shoppingCart.slice';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import CheckoutList from '../Checkout/CheckoutList';
-import TotalPrice from '../TotalPrice.tsx/TotalPrice';
+import moment from 'moment';
+import { OrderDTO } from '../../api/orderApi';
+import { BASE_URL } from '../../utils/consts';
 import styles from './modal.module.scss';
 import { RxCross2 } from 'react-icons/rx';
 
 interface Props {
-    setModal: (modal: boolean) => void;
+    order: OrderDTO;
 }
 
-const Modal = ({ setModal }: Props) => {
-    const total: number = useAppSelector(priceWithDelivery);
-    const dispatch = useAppDispatch();
-
+const Modal = ({ order }: Props) => {
     const closeModal = () => {
-        setModal(false);
-        dispatch(resetProducts(''));
+        window.location.href = BASE_URL;
     };
+
+    const currDate = moment(order.createdAt).format('D MMM, YYYY');
 
     return (
         <div className={styles.modalWrapper}>
@@ -31,24 +25,23 @@ const Modal = ({ setModal }: Props) => {
                 <ul className={styles.modal__list}>
                     <li>
                         <p>Order Number</p>
-                        19586687
+                        {order.id}
                     </li>
                     <li>
                         <p>Date</p>
-                        15 Sep, 2021
+                        {currDate}
                     </li>
                     <li>
-                        <p>Total</p>
-                        {total}.00
+                        <p>Total</p>${order.totalAmount.toFixed(2)}
                     </li>
                 </ul>
-                <div className={styles.modal__info}>
+                {/* <div className={styles.modal__info}>
                     <h2 className={styles.modal__title}>Order Details</h2>
                     <CheckoutList qty={'Qty'} />
                     <div className={styles.modal__total}>
                         <TotalPrice />
                     </div>
-                </div>
+                </div> */}
                 <p className={styles.modal__warn}>
                     Your order is currently being processed. You will receive an
                     order confirmation email shortly with the expected delivery
