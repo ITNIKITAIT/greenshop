@@ -9,7 +9,7 @@ export const orderApi = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
-        createOrder: builder.mutation<void, FieldValues>({
+        createOrder: builder.mutation<string, FieldValues>({
             query: (data) => ({
                 url: `/`,
                 method: 'POST',

@@ -1,11 +1,10 @@
-import { CartItem } from '@prisma/client';
+import { CartItem, Product } from '@prisma/client';
 
 export const PayOrderTemplate = (
     fullName: string,
-    items: any[],
+    items: (CartItem & { product: Product })[],
     total: number
 ) => {
-    console.log(items);
     return `
   <!DOCTYPE html>
   <html lang="en">

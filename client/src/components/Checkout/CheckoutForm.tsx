@@ -13,12 +13,13 @@ const CheckoutForm = ({ setModal }: Props) => {
     const { handleSubmit, register } = useFormContext();
     const totalAmount = useAppSelector(priceWithDelivery);
 
-    const [createOrder] = orderApi.useCreateOrderMutation();
+    const [createOrder, result] = orderApi.useCreateOrderMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         createOrder({ ...data, totalAmount });
-        // setModal(true);
     };
+    console.log(result.data);
+    if (result.data) window.location.href = result.data;
 
     return (
         <div>

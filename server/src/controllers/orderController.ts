@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import prisma from '../../prisma/prisma';
 import { sendEmail } from '../utils/sendEmail';
 import { PayOrderTemplate } from '../email/emailTemplates/PayOrderTemplate';
+import { createPayment, stripe } from '../utils/createPayment';
 
 interface IOrder {
     firstName: string;
@@ -19,7 +20,7 @@ class OrderController {
     async createOrder(req: Request, res: Response) {
         const data: IOrder = req.body;
         const token = req.cookies.cartToken;
-        console.log(token, data);
+
         try {
             if (!token) {
                 res.json({ error: 'Failed to update cart' });
@@ -62,9 +63,21 @@ class OrderController {
                 },
             });
 
-            await prisma.cartItem.deleteMany({
+            // await prisma.cartItem.deleteMany({
+            //     where: {
+            //         cartId: cart.id,
+            //     },
+            // });
+
+            const session = await createPayment(cart.items);
+            // TODO: do correct price and delivery ->
+            console.log(session);
+            await prisma.order.update({
                 where: {
-                    cartId: cart.id,
+                    id: order.id,
+                },
+                data: {
+                    paymentId: session.id,
                 },
             });
 
@@ -74,7 +87,7 @@ class OrderController {
                 PayOrderTemplate(order.fullName, cart.items, data.totalAmount)
             );
 
-            res.json(order);
+            res.json(session.url);
         } catch (e) {
             console.log(e);
         }
