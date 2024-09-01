@@ -6,16 +6,19 @@ type RangePrice = [number, number];
 
 const useFilters = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { from, to, type, category, sortBy } = getSearchParams(searchParams);
+    const { from, to, type, category, sortBy, page } =
+        getSearchParams(searchParams);
 
     const [prices, setPrices] = useState<RangePrice>([from, to]);
     const [sortType, setSortType] = useState<string>(type);
     const [SortBy, setSortBy] = useState<string>(sortBy);
+    const [currPage, setPage] = useState<number>(Number(page));
 
     useEffect(() => {
         setPrices([from, to]);
         setSortType(type);
         setSortBy(sortBy);
+        setPage(Number(page));
     }, [searchParams]);
 
     return {
@@ -26,6 +29,7 @@ const useFilters = () => {
         category,
         SortBy,
         setSortBy,
+        currPage,
         setSearchParams,
     };
 };

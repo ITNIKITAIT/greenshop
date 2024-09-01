@@ -5,16 +5,21 @@ import { ICategory } from '../components/Filter/Category';
 import { IFilter } from '../utils/getSearchParams';
 // import { GetSearchParams } from '../utils/getSearchParams';
 
+type PaginationProducts = {
+    products: IProduct[];
+    pages: number;
+};
+
 export const productApi = createApi({
     reducerPath: 'productApi',
     baseQuery: fetchBaseQuery({ baseUrl: API_URL + '/products' }),
     endpoints: (builder) => ({
-        getAllProducts: builder.query<IProduct[], void>({
+        getAllProducts: builder.query<PaginationProducts, void>({
             query: () => `/`,
         }),
-        getSortedProducts: builder.query<IProduct[], IFilter>({
-            query: ({ type, from, to, category, sortBy }) => {
-                let queryParams = `?type=${type}&from=${from}&to=${to}`;
+        getSortedProducts: builder.query<PaginationProducts, IFilter>({
+            query: ({ type, from, to, category, sortBy, page }) => {
+                let queryParams = `?type=${type}&from=${from}&to=${to}&page=${page}`;
 
                 if (category) queryParams += `&category=${category}`;
                 if (sortBy) queryParams += `&sortBy=${sortBy}`;

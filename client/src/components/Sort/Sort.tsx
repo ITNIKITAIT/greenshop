@@ -1,6 +1,6 @@
-import styles from './products.module.scss';
+import styles from '../Products/products.module.scss';
 import useFilters from '../../hooks/useFilters';
-import SortBy from '../Sort/SortBy';
+import SortBy from './SortBy';
 
 export type SortType = 'all' | 'new' | 'sale';
 
@@ -19,6 +19,7 @@ const Sort = () => {
             if (type === 'all') {
                 params.delete('category');
             }
+            params.delete('page');
             return params;
         });
     };

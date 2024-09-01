@@ -15,8 +15,11 @@ export const sortedProducts = async (params: SearchParams) => {
     const maxPrice = Number(params.to);
     const category = params.category;
     const sortBy = params.sortBy?.split('-') as [string, string];
+    const page = Number(params.page);
 
-    const products = await prisma.product.findMany({
+    const LIMIT: number = 9;
+
+    const productAmount = await prisma.product.count({
         where: {
             price: {
                 gte: minPrice,
@@ -37,5 +40,31 @@ export const sortedProducts = async (params: SearchParams) => {
         ],
     });
 
-    return products;
+    const products = await prisma.product.findMany({
+        where: {
+            price: {
+                gte: minPrice,
+                lte: maxPrice,
+            },
+            sale: {
+                not: type === 'sale' ? null : undefined,
+            },
+            category: {
+                name: category,
+            },
+        },
+        orderBy: [
+            { [sortBy[0]]: sortBy[1] },
+            {
+                createdAt: type === 'new' ? 'asc' : 'desc',
+            },
+        ],
+        skip: (page - 1) * LIMIT,
+
+        take: LIMIT,
+    });
+
+    const pages = Math.ceil(productAmount / LIMIT);
+
+    return { products, pages };
 };

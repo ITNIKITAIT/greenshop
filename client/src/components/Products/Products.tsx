@@ -1,10 +1,10 @@
-import Pages from './Pages';
 import ProductCard from './ProductCard';
-import Sort from './Sort';
+import Sort from '../Sort/Sort';
 import styles from './products.module.scss';
 import { productApi } from '../../api/productApi';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchParams } from '../../utils/getSearchParams';
+import Pagination from './Pagination';
 
 export interface IProduct {
     id: number;
@@ -20,9 +20,13 @@ export interface IProduct {
 const Products = () => {
     const [searchParams] = useSearchParams();
 
-    const { data: products, isLoading } = productApi.useGetSortedProductsQuery(
+    const { data, isLoading } = productApi.useGetSortedProductsQuery(
         getSearchParams(searchParams)
     );
+
+    if (data?.products.length === 0) {
+        return <div className={styles.NotFound}>No products found</div>;
+    }
 
     return (
         <div className={styles.products}>
@@ -30,11 +34,11 @@ const Products = () => {
             {!isLoading && (
                 <>
                     <div className={styles.products__list}>
-                        {(products ?? []).map((product) => (
+                        {(data?.products ?? []).map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
-                    <Pages products={products ?? []} />
+                    <Pagination pages={data?.pages as number} />
                 </>
             )}
         </div>
