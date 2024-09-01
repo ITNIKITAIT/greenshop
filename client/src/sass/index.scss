@@ -114,3 +114,49 @@ button {
     width: 150px;
     height: auto;
 }
+
+.sortSelect {
+    width: 180px;
+
+    .react-select__control {
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+        &:hover {
+            border-color: none;
+        }
+    }
+
+    .react-select__indicator-separator {
+        display: none;
+    }
+
+    .react-select__dropdown-indicator {
+        color: #333;
+    }
+
+    .react-select__menu {
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    .react-select__option {
+        background-color: #fff;
+        color: #333;
+        cursor: pointer;
+        &:hover {
+            background-color: #f1f1f1;
+        }
+    }
+
+    .react-select__single-value {
+        color: #333;
+    }
+}
+
+.select__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

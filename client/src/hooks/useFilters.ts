@@ -10,10 +10,12 @@ const useFilters = () => {
 
     const [prices, setPrices] = useState<RangePrice>([from, to]);
     const [sortType, setSortType] = useState<string>(type);
+    const [SortBy, setSortBy] = useState<string>(sortBy);
 
     useEffect(() => {
         setPrices([from, to]);
         setSortType(type);
+        setSortBy(sortBy);
     }, [searchParams]);
 
     return {
@@ -22,6 +24,8 @@ const useFilters = () => {
         sortType,
         setSortType,
         category,
+        SortBy,
+        setSortBy,
         setSearchParams,
     };
 };

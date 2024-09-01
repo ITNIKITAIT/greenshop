@@ -4,7 +4,7 @@ import Hero from '../components/Hero/Hero';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { orderApi } from '../api/orderApi';
 import { useSearchParams } from 'react-router-dom';
-import Modal from '../components/Modal/Modal';
+import OrderModal from '../components/Modal/OrderModal';
 
 const HomePage = () => {
     const [seractParams] = useSearchParams();
@@ -18,7 +18,7 @@ const HomePage = () => {
             <Hero />
             <Shop />
             <Footer />
-            {order && <Modal order={order} />}
+            {order && <OrderModal order={order} />}
         </>
     );
 };

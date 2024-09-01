@@ -1,31 +1,20 @@
 import { useState } from 'react';
 import styles from './authorization.module.scss';
 import { RxCross2 } from 'react-icons/rx';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { BiHide } from 'react-icons/bi';
+import Register from './Register';
+import Login from './Login';
 
 interface Props {
     setAuth: (modal: boolean) => void;
 }
 
-type Inputs = {
-    username?: string;
-    email: string;
-    password: string;
-    Repeatpassword?: string;
-};
-
 const Authorization = ({ setAuth }: Props) => {
     const [isLogin, setIsLogin] = useState<boolean>(true);
-    const { register, handleSubmit } = useForm<Inputs>();
-    const [passwordIsHidden, setPasswordHidden] = useState<boolean>(true);
 
-    const toggle = () => {
-        setPasswordHidden((prev) => !prev);
-    };
+    const [passwordIsHidden, setPasswordIsHidden] = useState<boolean>(true);
 
-    const getAuth: SubmitHandler<Inputs> = (data: Inputs) => {
-        console.log(data);
+    const togglePassword = () => {
+        setPasswordIsHidden((prev) => !prev);
     };
 
     return (
@@ -45,50 +34,23 @@ const Authorization = ({ setAuth }: Props) => {
                     </span>
                 </h1>
 
-                <p>Enter your username and password to login.</p>
-                <form onSubmit={handleSubmit(getAuth)}>
-                    {!isLogin && (
-                        <input
-                            autoComplete="off"
-                            placeholder="Username"
-                            type="text"
-                            {...register('username')}
-                        />
-                    )}
-                    <input
-                        autoComplete="off"
-                        placeholder="Enter your emal address"
-                        type="email"
-                        {...register('email')}
-                    />
-                    <div className={styles.inputPassword}>
-                        <input
-                            autoComplete="off"
-                            placeholder="Password"
-                            type={`${passwordIsHidden ? 'password' : 'text'}`}
-                            {...register('password')}
-                        />
-                        <BiHide onClick={toggle} className={styles.hideIcon} />
-                    </div>
-                    {!isLogin && (
-                        <div className={styles.inputPassword}>
-                            <input
-                                autoComplete="off"
-                                placeholder="Comfirm password"
-                                type={`${
-                                    passwordIsHidden ? 'password' : 'text'
-                                }`}
-                                {...register('Repeatpassword')}
-                            />
-                        </div>
-                    )}
-                    <button
-                        type="submit"
-                        className={'green-btn ' + styles.loginBtn}>
-                        {isLogin ? 'Login' : 'Register'}
-                    </button>
-                </form>
+                <p>
+                    {isLogin
+                        ? 'Enter your email and password to login.'
+                        : 'Enter your data to register'}
+                </p>
 
+                {!isLogin ? (
+                    <Register
+                        passwordIsHidden={passwordIsHidden}
+                        togglePassword={togglePassword}
+                    />
+                ) : (
+                    <Login
+                        passwordIsHidden={passwordIsHidden}
+                        togglePassword={togglePassword}
+                    />
+                )}
                 <RxCross2
                     className={styles.closeSvg}
                     onClick={() => setAuth(false)}

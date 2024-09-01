@@ -8,7 +8,7 @@ interface Props {
     order: OrderDTO;
 }
 
-const Modal = ({ order }: Props) => {
+const OrderModal = ({ order }: Props) => {
     const closeModal = () => {
         window.location.href = BASE_URL;
     };
@@ -59,4 +59,4 @@ const Modal = ({ order }: Props) => {
     );
 };
 
-export default Modal;
+export default OrderModal;

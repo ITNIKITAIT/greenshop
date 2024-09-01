@@ -14,6 +14,9 @@ const Category = ({ name, _count }: ICategory) => {
     const changeCategory = () => {
         setSearchParams((params) => {
             params.set('category', name);
+            if (params.get('type') === 'all') {
+                params.set('type', 'new');
+            }
             return params;
         });
     };

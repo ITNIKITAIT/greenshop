@@ -14,6 +14,7 @@ export const sortedProducts = async (params: SearchParams) => {
     const minPrice = Number(params.from);
     const maxPrice = Number(params.to);
     const category = params.category;
+    const sortBy = params.sortBy?.split('-') as [string, string];
 
     const products = await prisma.product.findMany({
         where: {
@@ -28,6 +29,12 @@ export const sortedProducts = async (params: SearchParams) => {
                 name: category,
             },
         },
+        orderBy: [
+            { [sortBy[0]]: sortBy[1] },
+            {
+                createdAt: type === 'new' ? 'asc' : 'desc',
+            },
+        ],
     });
 
     return products;

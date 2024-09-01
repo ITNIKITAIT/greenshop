@@ -31,17 +31,6 @@
             color: $greenColor;
         }
     }
-    div {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-    }
     &__current {
         font-weight: 700;
         color: $greenColor;

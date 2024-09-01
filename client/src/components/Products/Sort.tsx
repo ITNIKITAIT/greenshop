@@ -1,11 +1,11 @@
 import styles from './products.module.scss';
-import { MdKeyboardArrowDown } from 'react-icons/md';
 import useFilters from '../../hooks/useFilters';
+import SortBy from '../Sort/SortBy';
 
 export type SortType = 'all' | 'new' | 'sale';
 
 const Sort = () => {
-    const { sortType, setSortType, setSearchParams } = useFilters();
+    const { sortType, setSearchParams } = useFilters();
 
     const sortOptions: { type: SortType; content: string }[] = [
         { type: 'all', content: 'All Plants' },
@@ -16,9 +16,11 @@ const Sort = () => {
     const handleType = (type: SortType) => {
         setSearchParams((params) => {
             params.set('type', type);
+            if (type === 'all') {
+                params.delete('category');
+            }
             return params;
         });
-        setSortType(type);
     };
 
     return (
@@ -35,13 +37,8 @@ const Sort = () => {
                     </li>
                 ))}
             </ul>
-            <div>
-                Sort by:{' '}
-                <span>
-                    Default sorting{' '}
-                    <MdKeyboardArrowDown style={{ height: 'fit-content' }} />
-                </span>
-            </div>
+
+            <SortBy />
         </section>
     );
 };
