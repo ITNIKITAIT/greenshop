@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { cartApi } from '../api/cartApi';
 import { getCartDetails } from '../utils/cartDetails';
-import { store } from '../store/store';
+import { authApi } from '../api/authApi';
 
 export const fetchCart = createAsyncThunk(
     'shoppingCart/fetchCart',
@@ -14,8 +14,15 @@ export const fetchCart = createAsyncThunk(
     }
 );
 
-export const dispathCart = async () => {
-    store.dispatch(fetchCart());
-};
-
 export default fetchCart;
+
+export const fetchUser = createAsyncThunk(
+    'auth/fetchUser',
+    async (_, thunkAPi) => {
+        const response = await thunkAPi
+            .dispatch(authApi.endpoints.checkAuth.initiate())
+            .unwrap();
+
+        return response;
+    }
+);

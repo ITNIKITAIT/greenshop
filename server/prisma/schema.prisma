@@ -29,6 +29,8 @@ model User {
   orders           Order[]
   verificationCode VerificationCode?
 
+  verified Boolean @default(false)
+
   createdAt DateTime @default(now())
 }
 

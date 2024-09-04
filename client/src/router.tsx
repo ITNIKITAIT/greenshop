@@ -6,6 +6,7 @@ import {
     CHECKOUT_ROUTE,
     HOME_ROUTE,
     PRODUCT_ROUTE,
+    PROFILE_ROUTE,
     SHOPPING_CART_ROUTE,
     SHOP_ROUTE,
 } from './utils/consts';
@@ -15,7 +16,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import { store } from './store/store';
 import Root from './pages/Root';
 import RootShop from './pages/RootShop';
-import fetchCart from './modules/fetchCart';
+import fetchCart from './modules/fetching';
+import ProfilePage from './pages/ProfilePage';
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +51,10 @@ export const router = createBrowserRouter([
                         element: <CheckoutPage />,
                     },
                 ],
+            },
+            {
+                path: PROFILE_ROUTE,
+                element: <ProfilePage />,
             },
         ],
     },

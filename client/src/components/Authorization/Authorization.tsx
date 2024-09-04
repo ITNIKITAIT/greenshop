@@ -5,10 +5,10 @@ import Register from './Register';
 import Login from './Login';
 
 interface Props {
-    setAuth: (modal: boolean) => void;
+    closeModalAuth: () => void;
 }
 
-const Authorization = ({ setAuth }: Props) => {
+const Authorization = ({ closeModalAuth }: Props) => {
     const [isLogin, setIsLogin] = useState<boolean>(true);
 
     const [passwordIsHidden, setPasswordIsHidden] = useState<boolean>(true);
@@ -42,18 +42,20 @@ const Authorization = ({ setAuth }: Props) => {
 
                 {!isLogin ? (
                     <Register
+                        closeModalAuth={closeModalAuth}
                         passwordIsHidden={passwordIsHidden}
                         togglePassword={togglePassword}
                     />
                 ) : (
                     <Login
+                        closeModalAuth={closeModalAuth}
                         passwordIsHidden={passwordIsHidden}
                         togglePassword={togglePassword}
                     />
                 )}
                 <RxCross2
                     className={styles.closeSvg}
-                    onClick={() => setAuth(false)}
+                    onClick={closeModalAuth}
                 />
             </div>
         </div>

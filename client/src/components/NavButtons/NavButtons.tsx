@@ -8,12 +8,16 @@ import { SHOPPING_CART_ROUTE } from '../../utils/consts';
 import { useState } from 'react';
 import Authorization from '../Authorization/Authorization';
 import SearchInput from './SearchInput';
+import { isVerified } from '../../modules/auth.slice';
 
 const NavButtons = () => {
     const amount = useAppSelector(amountProducts);
     const navigate = useNavigate();
+    const isAuth = useAppSelector(isVerified);
 
     const [auth, setAuth] = useState<boolean>(false);
+
+    const closeModalAuth = () => setAuth(false);
 
     return (
         <div className={styles.nav__buttons}>
@@ -28,13 +32,22 @@ const NavButtons = () => {
                     ''
                 )}
             </div>
-            <button
-                onClick={() => setAuth(true)}
-                className={`green-btn ` + styles.btnLogin}>
-                <TbLogin2 className={styles.loginIcon} />
-                Login
-            </button>
-            {auth && <Authorization setAuth={setAuth} />}
+            {isAuth ? (
+                <button
+                    onClick={() => navigate('/profile')}
+                    className={`green-btn ` + styles.btnLogin}>
+                    Profile
+                </button>
+            ) : (
+                <button
+                    onClick={() => setAuth(true)}
+                    className={`green-btn ` + styles.btnLogin}>
+                    <TbLogin2 className={styles.loginIcon} />
+                    Login
+                </button>
+            )}
+
+            {auth && <Authorization closeModalAuth={closeModalAuth} />}
         </div>
     );
 };

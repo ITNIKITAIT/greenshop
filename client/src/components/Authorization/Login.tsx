@@ -1,21 +1,21 @@
-import {
-    FieldValues,
-    FormProvider,
-    SubmitHandler,
-    useForm,
-} from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { BiHide } from 'react-icons/bi';
 import styles from './authorization.module.scss';
 import AuthFormInput from './AuthFormInput';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formLoginSchema, TFormLoginSchema } from './auth-form-schema';
+import { authApi } from '../../api/authApi';
+import { useAppDispatch } from '../../store/store';
+import { setToken, setUser } from '../../modules/auth.slice';
+import toast from 'react-hot-toast';
 
 interface Props {
     passwordIsHidden: boolean;
     togglePassword: () => void;
+    closeModalAuth: () => void;
 }
 
-const Login = ({ togglePassword, passwordIsHidden }: Props) => {
+const Login = ({ togglePassword, passwordIsHidden, closeModalAuth }: Props) => {
     const form = useForm<TFormLoginSchema>({
         resolver: zodResolver(formLoginSchema),
     });
@@ -25,8 +25,22 @@ const Login = ({ togglePassword, passwordIsHidden }: Props) => {
         formState: { errors },
     } = form;
 
-    const getAuth: SubmitHandler<FieldValues> = (data: FieldValues) => {
-        console.log(data);
+    const dispatch = useAppDispatch();
+
+    const [onLogin] = authApi.useLoginMutation();
+
+    const getAuth: SubmitHandler<TFormLoginSchema> = async (
+        data: TFormLoginSchema
+    ) => {
+        const { data: response, error } = await onLogin(data);
+        if (response) {
+            dispatch(setToken(response.token));
+            dispatch(setUser(response.user));
+            closeModalAuth();
+        }
+        if (error) {
+            toast.error(JSON.stringify(error));
+        }
     };
 
     return (

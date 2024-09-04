@@ -1,21 +1,25 @@
-import {
-    FieldValues,
-    FormProvider,
-    SubmitHandler,
-    useForm,
-} from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { BiHide } from 'react-icons/bi';
 import styles from './authorization.module.scss';
 import AuthFormInput from './AuthFormInput';
 import { formRegisterSchema, TFormRegisterSchema } from './auth-form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { authApi } from '../../api/authApi';
+import { useAppDispatch } from '../../store/store';
+import { setToken } from '../../modules/auth.slice';
+import toast from 'react-hot-toast';
 
 interface Props {
     passwordIsHidden: boolean;
     togglePassword: () => void;
+    closeModalAuth: () => void;
 }
 
-const Register = ({ togglePassword, passwordIsHidden }: Props) => {
+const Register = ({
+    togglePassword,
+    passwordIsHidden,
+    closeModalAuth,
+}: Props) => {
     const form = useForm<TFormRegisterSchema>({
         resolver: zodResolver(formRegisterSchema),
     });
@@ -26,8 +30,24 @@ const Register = ({ togglePassword, passwordIsHidden }: Props) => {
         formState: { errors },
     } = form;
 
-    const getAuth: SubmitHandler<FieldValues> = (data: FieldValues) => {
-        console.log(data);
+    const dispatch = useAppDispatch();
+
+    const [onRegister] = authApi.useRegisterMutation();
+
+    const getAuth: SubmitHandler<TFormRegisterSchema> = async (
+        data: TFormRegisterSchema
+    ) => {
+        const { data: response, error } = await onRegister(data);
+        if (response) {
+            dispatch(setToken(response.token));
+            toast('Please confirm your email', {
+                icon: '✍️',
+            });
+            closeModalAuth();
+        }
+        if (error) {
+            toast.error(JSON.stringify(error));
+        }
     };
 
     return (
