@@ -2,10 +2,11 @@ import { Request, Response } from 'express';
 import prisma from '../../prisma/prisma';
 import { sendEmail } from '../utils/sendEmail';
 import { PayOrderTemplate } from '../email/emailTemplates/PayOrderTemplate';
-import { createPayment, stripe } from '../utils/createPayment';
+import { createPayment } from '../utils/createPayment';
 import { SuccesOrder } from '../email/emailTemplates/SuccesOrder';
 
 interface IOrder {
+    userId: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -30,7 +31,7 @@ class OrderController {
             }
             const cart = await prisma.cart.findFirst({
                 where: {
-                    token,
+                    userId: data.userId,
                 },
                 include: {
                     items: {
@@ -42,17 +43,15 @@ class OrderController {
             });
 
             if (!cart) {
-                res.json({ error: 'Cart not found' });
-                return;
+                return res.status(401).json({ error: 'Cart not found' });
             }
             if (!cart?.items.length) {
-                res.json({ error: 'Cart is empty' });
-                return;
+                return res.status(401).json({ error: 'Cart is empty' });
             }
 
             const order = await prisma.order.create({
                 data: {
-                    userId: 1,
+                    userId: data.userId,
                     fullName: data.firstName + ' ' + data.lastName,
                     email: data.email,
                     country: data.country,
@@ -138,7 +137,7 @@ class OrderController {
         }
     }
 
-    async getOrderByID(req: Request, res: Response) {
+    async getOrderById(req: Request, res: Response) {
         const { orderId } = req.params;
         const order = await prisma.order.findFirst({
             where: {
@@ -146,6 +145,15 @@ class OrderController {
             },
         });
         res.json(order);
+    }
+    async getOrdersyUserId(req: Request, res: Response) {
+        const { userId } = req.params;
+        const orders = await prisma.order.findMany({
+            where: {
+                userId: Number(userId),
+            },
+        });
+        res.json(orders);
     }
 }
 export default new OrderController();

@@ -37,6 +37,7 @@ class authController {
         res.json({
             token,
             user: {
+                id: user.id,
                 name: user.name,
                 verified: user.verified,
                 email: user.email,
@@ -108,6 +109,7 @@ class authController {
         res.json({
             token,
             user: {
+                id: user.id,
                 name: user.name,
                 verified: user.verified,
                 email: user.email,

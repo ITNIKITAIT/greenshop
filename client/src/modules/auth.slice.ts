@@ -7,6 +7,7 @@ type AuthState = {
 };
 
 export interface IUser {
+    id: number;
     email: string;
     name: string;
     verified: boolean;
@@ -21,7 +22,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     selectors: {
-        isVerified: (state) => state?.user?.verified,
+        isVerified: (state) => state.user?.verified,
+        selectUser: (state) => state.user,
+        selectUserId: (state) => state.user?.id,
     },
     reducers: {
         setToken: (state, action: PayloadAction<string>) => {
@@ -29,9 +32,10 @@ const authSlice = createSlice({
             localStorage.setItem('jwt', token);
             state.token = token;
         },
-        logout: (state) => {
+        logout: (state, action) => {
             localStorage.removeItem('jwt');
             state.token = null;
+            state.user = null;
         },
         setUser: (state, action: PayloadAction<IUser>) => {
             state.user = action.payload;
@@ -50,5 +54,5 @@ const authSlice = createSlice({
 });
 
 export const { setToken, logout, setUser } = authSlice.actions;
-export const { isVerified } = authSlice.selectors;
+export const { isVerified, selectUser, selectUserId } = authSlice.selectors;
 export default authSlice.reducer;

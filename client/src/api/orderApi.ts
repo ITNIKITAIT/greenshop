@@ -37,5 +37,8 @@ export const orderApi = createApi({
         getOrder: builder.query<OrderDTO, string>({
             query: (orderId) => `/${orderId}`,
         }),
+        getOrdersByUser: builder.query<OrderDTO[], number>({
+            query: (userId) => `/user/${userId}`,
+        }),
     }),
 });

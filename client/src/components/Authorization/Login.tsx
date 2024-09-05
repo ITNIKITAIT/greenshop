@@ -36,6 +36,7 @@ const Login = ({ togglePassword, passwordIsHidden, closeModalAuth }: Props) => {
         if (response) {
             dispatch(setToken(response.token));
             dispatch(setUser(response.user));
+            toast.success('You have successfully logged in');
             closeModalAuth();
         }
         if (error) {

@@ -1,18 +1,16 @@
 import moment from 'moment';
 import { OrderDTO } from '../../api/orderApi';
-import { BASE_URL } from '../../utils/consts';
 import styles from './modal.module.scss';
 import { RxCross2 } from 'react-icons/rx';
+// import CheckoutList from '../Checkout/CheckoutList';
+// import TotalPrice from '../TotalPrice.tsx/TotalPrice';
 
 interface Props {
     order: OrderDTO;
+    close: () => void;
 }
 
-const OrderModal = ({ order }: Props) => {
-    const closeModal = () => {
-        window.location.href = BASE_URL;
-    };
-
+const OrderModal = ({ order, close }: Props) => {
     const currDate = moment(order.createdAt).format('D MMM, YYYY');
 
     return (
@@ -49,11 +47,11 @@ const OrderModal = ({ order }: Props) => {
                 </p>
                 <button
                     className={`green-btn ${styles.doneBtn}`}
-                    onClick={closeModal}>
+                    onClick={close}>
                     Done
                 </button>
 
-                <RxCross2 className={styles.closeSvg} onClick={closeModal} />
+                <RxCross2 className={styles.closeSvg} onClick={close} />
             </div>
         </div>
     );

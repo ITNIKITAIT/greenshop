@@ -16,7 +16,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import { store } from './store/store';
 import Root from './pages/Root';
 import RootShop from './pages/RootShop';
-import fetchCart from './modules/fetching';
+import fetchCart, { fetchUser } from './modules/fetching';
 import ProfilePage from './pages/ProfilePage';
 
 export const router = createBrowserRouter([
@@ -55,6 +55,7 @@ export const router = createBrowserRouter([
             {
                 path: PROFILE_ROUTE,
                 element: <ProfilePage />,
+                loader: async () => store.dispatch(fetchUser()),
             },
         ],
     },

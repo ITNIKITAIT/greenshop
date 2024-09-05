@@ -7,16 +7,18 @@ import {
     amountProducts,
     priceWithDelivery,
 } from '../../modules/shoppingCart.slice';
+import { selectUserId } from '../../modules/auth.slice';
 
 const CheckoutForm = () => {
     const { handleSubmit, register } = useFormContext();
     const totalPrice = useAppSelector(priceWithDelivery);
     const deliveryPrice = useAppSelector(amountProducts) * 3;
+    const userId = useAppSelector(selectUserId);
 
     const [createOrder, result] = orderApi.useCreateOrderMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        createOrder({ ...data, totalPrice, deliveryPrice });
+        createOrder({ ...data, totalPrice, deliveryPrice, userId });
     };
 
     if (result.data) window.location.href = result.data;

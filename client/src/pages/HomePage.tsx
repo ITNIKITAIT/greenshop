@@ -5,6 +5,7 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { orderApi } from '../api/orderApi';
 import { useSearchParams } from 'react-router-dom';
 import OrderModal from '../components/Modal/OrderModal';
+import { BASE_URL } from '../utils/consts';
 
 const HomePage = () => {
     const [seractParams] = useSearchParams();
@@ -13,12 +14,16 @@ const HomePage = () => {
         seractParams.get('paid') || skipToken
     );
 
+    const closeOrderModal = () => {
+        window.location.href = BASE_URL;
+    };
+
     return (
         <>
             <Hero />
             <Shop />
             <Footer />
-            {order && <OrderModal order={order} />}
+            {order && <OrderModal close={closeOrderModal} order={order} />}
         </>
     );
 };

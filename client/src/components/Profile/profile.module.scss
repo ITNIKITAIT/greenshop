@@ -1,0 +1,141 @@
+@import '../../sass/variables.scss';
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    &__sidebar {
+        background-color: $bgColor;
+        padding-top: 20px;
+        max-width: 310px;
+        width: 100%;
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 16px;
+            padding-left: 18px;
+            margin-bottom: 15px;
+        }
+        ul {
+            li {
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 45px;
+                color: $secondaryColor;
+                border-left: solid 5px transparent;
+                padding-left: 18px;
+                display: flex;
+                align-items: center;
+                gap: 9px;
+                cursor: pointer;
+
+                transition: 0.15s;
+
+                &:hover {
+                    background-color: $whiteColor;
+                    color: $greenColor;
+                }
+            }
+        }
+        button {
+            padding: 19px 25px;
+            color: $greenColor;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 15px;
+            border-top: 1px solid #46a35956;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background-color: transparent;
+
+            transition: 0.15s;
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+    }
+}
+
+.property__active {
+    background-color: $whiteColor;
+    color: $greenColor !important;
+    border-left: solid 5px $greenColor !important;
+    font-weight: 700 !important;
+}
+
+.profileSection {
+    width: 100%;
+    h3 {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 16px;
+        margin-bottom: 20px;
+    }
+    &__info {
+        color: $greenColor;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 7px;
+        span {
+            color: $primaryColor;
+            font-size: 18px;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+    }
+}
+
+.orderSection {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    grid-auto-rows: 50px;
+    grid-row-gap: 20px;
+
+    &__id {
+        font-size: 22px;
+        font-weight: 600;
+        padding-left: 15px;
+        width: 100%;
+        background-color: $bgColor;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__price {
+        width: 100%;
+        background-color: $bgColor;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: $greenColor;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    button {
+        background-color: $greenColor;
+        height: 35px;
+        width: 100px;
+        font-size: 15px;
+    }
+
+    &__status {
+        width: 100%;
+        background-color: $bgColor;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    &__details {
+        width: 100%;
+        background-color: $bgColor;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
