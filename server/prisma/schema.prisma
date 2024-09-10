@@ -26,6 +26,7 @@ model User {
   role     UserRole @default(USER)
 
   cart             Cart?
+  wishlist         WishList?
   orders           Order[]
   verificationCode VerificationCode?
 
@@ -43,6 +44,7 @@ model Product {
   rating      Float   @default(0)
 
   cartItems CartItem[]
+  wishItems WishItem[]
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
@@ -121,6 +123,31 @@ model CartItem {
   cartId Int
 
   quantity Int @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WishList {
+  id Int @id @default(autoincrement())
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @unique
+
+  items WishItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WishItem {
+  id Int @id @default(autoincrement())
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  wishlist   WishList @relation(fields: [wishlistId], references: [id])
+  wishlistId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
