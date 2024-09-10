@@ -6,11 +6,12 @@ import { IoCartOutline } from 'react-icons/io5';
 import { BsHeart } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { getProductRoute } from '../../utils/consts';
-import { useAppDispatch } from '../../store/store';
 import { withDiscount } from '../../utils/discountFunc';
-import { cartApi } from '../../api/cartApi';
-import { MouseEvent, useEffect } from 'react';
+import { MouseEvent } from 'react';
 import toast from 'react-hot-toast';
+import { useAppSelector } from '../../store/store';
+import { selectUserId } from '../../modules/auth.slice';
+import { useAddButtons } from '../../hooks/useAddButtons';
 
 interface Props {
     product: IProduct;
@@ -19,19 +20,25 @@ interface Props {
 const ProductCard = ({ product }: Props) => {
     const { id, name, price, sale } = product;
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+    const userId = useAppSelector(selectUserId);
 
-    const [addCartItem, result] = cartApi.useAddCartItemMutation();
+    const { addWishItem, addCartItem } = useAddButtons();
 
     const addToCart = async (e: MouseEvent) => {
         e.stopPropagation();
         addCartItem({ ...product, quantity: 1 });
     };
 
-    useEffect(() => {
-        if (result.isError) toast.error('Failed to add to cart');
-        if (result.isSuccess) toast.success('Added to cart');
-    }, [result]);
+    const addToWishlist = (e: MouseEvent) => {
+        e.stopPropagation();
+        if (!userId) {
+            toast.error(
+                'You must first register to add a product to your wishlist.'
+            );
+        } else {
+            addWishItem({ productId: product.id, userId });
+        }
+    };
 
     return (
         <div className={styles.product}>
@@ -44,7 +51,7 @@ const ProductCard = ({ product }: Props) => {
                         <IoCartOutline className={styles.product__icons} />
                     </div>
                     <div>
-                        <BsHeart />
+                        <BsHeart onClick={addToWishlist} />
                     </div>
                     <div>
                         <FiSearch />

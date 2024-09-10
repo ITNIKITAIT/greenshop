@@ -8,14 +8,18 @@ interface WishListProps {
 
 class wishlistController {
     async getWishList(req: Request, res: Response) {
-        const { userId } = req.body;
+        const userId = req.params.userId;
         try {
             const wishlist = await prisma.wishList.findFirst({
                 where: {
-                    userId,
+                    userId: Number(userId),
                 },
                 include: {
-                    items: true,
+                    items: {
+                        include: {
+                            product: true,
+                        },
+                    },
                 },
             });
 
@@ -47,6 +51,19 @@ class wishlistController {
             }
             if (!productId)
                 return res.status(404).json({ message: 'Product not found' });
+
+            const existingProduct = await prisma.wishItem.findFirst({
+                where: {
+                    productId,
+                    wishlistId: wishlist!.id,
+                },
+            });
+
+            if (existingProduct)
+                return res
+                    .status(200)
+                    .json({ message: 'product already exists' });
+
             await prisma.wishItem.create({
                 data: {
                     productId,

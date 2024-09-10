@@ -2,7 +2,7 @@ import { Router } from 'express';
 import wishlistController from '../controllers/wishlistController';
 const router = Router();
 
-router.get('/get', wishlistController.getWishList);
+router.get('/get/:userId', wishlistController.getWishList);
 
 router.post('/add', wishlistController.addWishItem);
 router.delete('/remove', wishlistController.removeWishItem);

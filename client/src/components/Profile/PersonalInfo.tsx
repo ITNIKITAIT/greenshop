@@ -4,7 +4,7 @@ import styles from './profile.module.scss';
 
 const PersonalInfo = () => {
     const user = useAppSelector(selectUser);
-    console.log(user);
+
     return (
         <div className={styles.profileSection}>
             <h3>Personal Information</h3>

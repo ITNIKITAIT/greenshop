@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './product.module.scss';
 import { BsHeart } from 'react-icons/bs';
 import { IProduct } from '../Products/Products';
-import { cartApi } from '../../api/cartApi';
 import toast from 'react-hot-toast';
+import { useAddButtons } from '../../hooks/useAddButtons';
+import { selectUserId } from '../../modules/auth.slice';
+import { useAppSelector } from '../../store/store';
 
 const ProductButtons = (product: IProduct) => {
     const [count, setCount] = useState<number>(1);
+    const userId = useAppSelector(selectUserId);
 
-    const [addCartItem, result] = cartApi.useAddCartItemMutation();
+    const { addWishItem, addCartItem } = useAddButtons();
 
     const handleAddItem = () => {
         addCartItem({ ...product, quantity: count });
@@ -19,10 +22,15 @@ const ProductButtons = (product: IProduct) => {
     };
     const handlePlus = () => setCount(count + 1);
 
-    useEffect(() => {
-        if (result.isError) toast.error('Failed to add to cart');
-        if (result.isSuccess) toast.success('Added to cart');
-    }, [result]);
+    const addToWishlist = () => {
+        if (!userId) {
+            toast.error(
+                'You must first register to add a product to your wishlist.'
+            );
+        } else {
+            addWishItem({ productId: product.id, userId });
+        }
+    };
 
     return (
         <div className={styles.product__buttons}>
@@ -45,7 +53,7 @@ const ProductButtons = (product: IProduct) => {
                     ADD TO CART
                 </button>
                 <button className={'white-btn ' + styles.btnFavorite}>
-                    <BsHeart />
+                    <BsHeart onClick={addToWishlist} />
                 </button>
             </div>
         </div>
