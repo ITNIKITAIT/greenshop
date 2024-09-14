@@ -1,24 +1,10 @@
-import { useState } from 'react';
 import styles from './product.module.scss';
 
-type Description = 'Description' | 'Reviews';
-
 const ProductMore = () => {
-    const [type, setType] = useState<Description>('Description');
-
     return (
         <section className={styles.product__more}>
             <div>
-                <h3
-                    className={`${type === 'Description' && styles.current}`}
-                    onClick={() => setType('Description')}>
-                    Product Description
-                </h3>
-                <h3
-                    className={`${type === 'Reviews' && styles.current}`}
-                    onClick={() => setType('Reviews')}>
-                    Reviews (19)
-                </h3>
+                <h3>Product Description</h3>
             </div>
             <p>
                 The ceramic cylinder planters come with a wooden stand to help

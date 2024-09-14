@@ -22,6 +22,8 @@ const Category = ({ name, _count }: ICategory) => {
         });
     };
 
+    if (_count.products === 0) return <></>;
+
     return (
         <li
             onClick={changeCategory}

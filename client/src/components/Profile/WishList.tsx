@@ -13,7 +13,7 @@ const WishList = () => {
     return (
         <div className={styles.profileSection}>
             <h3>Wishlist</h3>
-            {wishlist?.items.length === 0 ? (
+            {wishlist?.items.length === 0 || !wishlist ? (
                 <div>Your wishlist is empty</div>
             ) : (
                 <div className={styles.wishSection}>

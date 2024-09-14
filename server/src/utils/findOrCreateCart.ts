@@ -9,6 +9,13 @@ export const findOrCreateCart = async (
         where: {
             token,
         },
+        include: {
+            items: {
+                include: {
+                    product: true,
+                },
+            },
+        },
     });
 
     if (!cart) {
@@ -16,6 +23,13 @@ export const findOrCreateCart = async (
             data: {
                 token,
                 userId,
+            },
+            include: {
+                items: {
+                    include: {
+                        product: true,
+                    },
+                },
             },
         });
     }

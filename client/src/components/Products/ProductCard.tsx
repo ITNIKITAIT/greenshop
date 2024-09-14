@@ -3,15 +3,15 @@ import Discount from '../Discount/Discount';
 import { IProduct } from './Products';
 import { FiSearch } from 'react-icons/fi';
 import { IoCartOutline } from 'react-icons/io5';
-import { BsHeart } from 'react-icons/bs';
+import Heart from '@react-sandbox/heart';
 import { useNavigate } from 'react-router-dom';
 import { getProductRoute } from '../../utils/consts';
 import { withDiscount } from '../../utils/discountFunc';
-import { MouseEvent } from 'react';
-import toast from 'react-hot-toast';
+import { MouseEvent, useEffect } from 'react';
 import { useAppSelector } from '../../store/store';
-import { selectUserId } from '../../modules/auth.slice';
 import { useAddButtons } from '../../hooks/useAddButtons';
+import { selectItemById } from '../../modules/wishList.slice';
+import useFavourites from '../../hooks/useFavourites';
 
 interface Props {
     product: IProduct;
@@ -19,26 +19,30 @@ interface Props {
 
 const ProductCard = ({ product }: Props) => {
     const { id, name, price, sale } = product;
-    const navigate = useNavigate();
-    const userId = useAppSelector(selectUserId);
 
-    const { addWishItem, addCartItem } = useAddButtons();
+    const navigate = useNavigate();
+    const isFavourite = useAppSelector((state) => selectItemById(state, id));
+
+    const { addCartItem } = useAddButtons();
+    const { addToWishlist, removeFromWishlist } = useFavourites();
 
     const addToCart = async (e: MouseEvent) => {
         e.stopPropagation();
         addCartItem({ ...product, quantity: 1 });
     };
 
-    const addToWishlist = (e: MouseEvent) => {
+    const toggleFavourites = (e: MouseEvent) => {
         e.stopPropagation();
-        if (!userId) {
-            toast.error(
-                'You must first register to add a product to your wishlist.'
-            );
+        if (isFavourite) {
+            removeFromWishlist(product);
         } else {
-            addWishItem({ productId: product.id, userId });
+            addToWishlist(product);
         }
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className={styles.product}>
@@ -50,8 +54,16 @@ const ProductCard = ({ product }: Props) => {
                     <div onClick={addToCart}>
                         <IoCartOutline className={styles.product__icons} />
                     </div>
-                    <div>
-                        <BsHeart onClick={addToWishlist} />
+                    <div onClick={toggleFavourites}>
+                        <Heart
+                            strokeWidth={40}
+                            inactiveColor={'#222222'}
+                            activeColor={'#46a358'}
+                            width={26}
+                            height={26}
+                            active={isFavourite}
+                            onClick={() => {}}
+                        />
                     </div>
                     <div>
                         <FiSearch />

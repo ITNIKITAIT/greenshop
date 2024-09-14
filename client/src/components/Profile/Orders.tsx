@@ -11,11 +11,15 @@ const Orders = () => {
     return (
         <div className={styles.profileSection}>
             <h3>Your Orders</h3>
-            <div className={styles.orderSection}>
-                {orders?.map((order) => (
-                    <OrderItem key={order.id} {...order} />
-                ))}
-            </div>
+            {!orders || orders?.length === 0 ? (
+                <div>You don't have orders</div>
+            ) : (
+                <div className={styles.orderSection}>
+                    {orders?.map((order) => (
+                        <OrderItem key={order.id} {...order} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

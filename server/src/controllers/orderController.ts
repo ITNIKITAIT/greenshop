@@ -29,7 +29,8 @@ class OrderController {
                 res.json({ error: 'Failed to update cart' });
                 return;
             }
-            const cart = await prisma.cart.findFirst({
+
+            let cart = await prisma.cart.findFirst({
                 where: {
                     userId: data.userId,
                 },
@@ -43,12 +44,52 @@ class OrderController {
             });
 
             if (!cart) {
+                cart = await prisma.cart.update({
+                    where: {
+                        token,
+                    },
+                    data: {
+                        userId: data.userId,
+                    },
+                    include: {
+                        items: {
+                            include: {
+                                product: true,
+                            },
+                        },
+                    },
+                });
+            }
+
+            if (token !== cart.token) {
+                await prisma.cart.delete({
+                    where: {
+                        id: cart.id,
+                    },
+                });
+                cart = await prisma.cart.update({
+                    where: {
+                        token,
+                    },
+                    data: {
+                        userId: data.userId,
+                    },
+                    include: {
+                        items: {
+                            include: {
+                                product: true,
+                            },
+                        },
+                    },
+                });
+            }
+
+            if (!cart) {
                 return res.status(401).json({ error: 'Cart not found' });
             }
             if (!cart?.items.length) {
                 return res.status(401).json({ error: 'Cart is empty' });
             }
-
             const order = await prisma.order.create({
                 data: {
                     userId: data.userId,

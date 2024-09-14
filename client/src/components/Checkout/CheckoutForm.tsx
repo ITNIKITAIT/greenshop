@@ -8,6 +8,7 @@ import {
     priceWithDelivery,
 } from '../../modules/shoppingCart.slice';
 import { selectUserId } from '../../modules/auth.slice';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = () => {
     const { handleSubmit, register } = useFormContext();
@@ -18,7 +19,11 @@ const CheckoutForm = () => {
     const [createOrder, result] = orderApi.useCreateOrderMutation();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        createOrder({ ...data, totalPrice, deliveryPrice, userId });
+        if (!userId) {
+            toast.error('First login to your account');
+        } else {
+            createOrder({ ...data, totalPrice, deliveryPrice, userId });
+        }
     };
 
     if (result.data) window.location.href = result.data;

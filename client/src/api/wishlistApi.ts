@@ -7,13 +7,13 @@ type WishProps = {
     productId: number;
 };
 
-interface WishlistDTO {
-    id: number;
+export interface WishlistDTO {
     items: WishItem[];
 }
 
 interface WishItem {
     id: number;
+    productId: number;
     product: IProduct;
 }
 

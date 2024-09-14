@@ -6,13 +6,13 @@ import toast from 'react-hot-toast';
 export const useAddButtons = () => {
     const [addCartItem, cartResult] = cartApi.useAddCartItemMutation();
     const [addWishItem, wishResult] = wishlistApi.useAddWishItemMutation();
+    const [removeWishItem] = wishlistApi.useRemoveWishItemMutation();
 
     useEffect(() => {
         if (cartResult.isError) toast.error('Failed to add to cart');
         if (cartResult.isSuccess) toast.success('Added to cart');
         if (wishResult.isError) toast.error('Failed to add to wishlist');
-        if (wishResult.isSuccess) toast.success('Added to wishlist');
     }, [cartResult, wishResult]);
 
-    return { addCartItem, addWishItem };
+    return { addCartItem, addWishItem, removeWishItem };
 };

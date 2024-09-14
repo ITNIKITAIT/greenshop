@@ -1,13 +1,12 @@
 import { IProduct } from '../Products/Products';
 import styles from './product.module.scss';
-import { FaStar } from 'react-icons/fa';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
 import ProductButtons from './ProductButtons';
 
 const ProductInfo = (product: IProduct) => {
-    const { name, price, sale, rating } = product;
+    const { name, price, sale } = product;
     return (
         <div className={styles.product__description}>
             <h2>{name}</h2>
@@ -26,21 +25,6 @@ const ProductInfo = (product: IProduct) => {
                     ) : (
                         <p className={styles.product__price}>${price}.00</p>
                     )}
-                </div>
-                <div>
-                    <div className={styles.stars}>
-                        {[...Array(5)].map((_, i) =>
-                            rating >= i + 1 ? (
-                                <FaStar key={i} className={styles.starIcon} />
-                            ) : (
-                                <FaStar
-                                    key={i}
-                                    className={styles.unColoredIcon}
-                                />
-                            )
-                        )}
-                    </div>
-                    {rating} Customer Review
                 </div>
             </div>
             <div className={styles.product__section}>

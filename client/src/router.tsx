@@ -16,8 +16,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import { store } from './store/store';
 import Root from './pages/Root';
 import RootShop from './pages/RootShop';
-import fetchCart, { fetchUser } from './modules/fetching';
 import ProfilePage from './pages/ProfilePage';
+import { fetchCart, fetchUser } from './modules/fetching';
 
 export const router = createBrowserRouter([
     {

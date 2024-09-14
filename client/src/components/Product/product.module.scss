@@ -178,16 +178,13 @@
             h3 {
                 position: relative;
                 font-size: 17px;
-                font-weight: 400;
+                font-weight: 700;
                 line-height: 16px;
                 color: $primaryColor;
                 cursor: pointer;
                 padding: 10px 0;
                 transition: 0.1s;
-
-                &:hover {
-                    color: $greenColor;
-                }
+                color: $greenColor;
             }
             .current {
                 font-weight: 700;

@@ -107,7 +107,7 @@ model Cart {
 
   items CartItem[]
 
-  token String
+  token String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

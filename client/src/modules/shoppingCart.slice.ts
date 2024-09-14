@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IProduct } from '../components/Products/Products';
 import { withDiscount } from '../utils/discountFunc';
-import fetchCart from './fetching';
+import { fetchCart } from './fetching';
 
 export interface ICart {
     items: ICartItem[];

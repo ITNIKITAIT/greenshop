@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import shoppingCartReducer from '../modules/shoppingCart.slice';
 import authReducer from '../modules/auth.slice';
+import wishListReducer from '../modules/wishList.slice';
 import { productApi } from '../api/productApi';
 import { cartApi } from '../api/cartApi';
 import { orderApi } from '../api/orderApi';
@@ -12,6 +13,7 @@ export const store = configureStore({
     reducer: {
         shoppingCart: shoppingCartReducer,
         auth: authReducer,
+        wishList: wishListReducer,
         [productApi.reducerPath]: productApi.reducer,
         [cartApi.reducerPath]: cartApi.reducer,
         [orderApi.reducerPath]: orderApi.reducer,
