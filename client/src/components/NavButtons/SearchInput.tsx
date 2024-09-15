@@ -57,7 +57,7 @@ const SearchInput = () => {
                             key={product.id}
                             className={styles.searchLink}
                             to={getProductRoute(product.id)}>
-                            <img src="/img/flowers.png" alt="product" />
+                            <img src={product.imageUrl} alt="product" />
                             <h3>{product.name}</h3>
                         </Link>
                     ))}

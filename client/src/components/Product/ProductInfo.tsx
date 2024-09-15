@@ -4,9 +4,16 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
 import ProductButtons from './ProductButtons';
+import { productApi } from '../../api/productApi';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 const ProductInfo = (product: IProduct) => {
-    const { name, price, sale } = product;
+    const { name, price, sale, shortDesc, categoryId } = product;
+
+    const { data: category } = productApi.useGetProductCategoryQuery(
+        categoryId ?? skipToken
+    );
+
     return (
         <div className={styles.product__description}>
             <h2>{name}</h2>
@@ -29,12 +36,7 @@ const ProductInfo = (product: IProduct) => {
             </div>
             <div className={styles.product__section}>
                 <h5>Short Description:</h5>
-                <p>
-                    The ceramic cylinder planters come with a wooden stand to
-                    help elevate your plants off the ground. The ceramic
-                    cylinder planters come with a wooden stand to help elevate
-                    your plants off the ground.{' '}
-                </p>
+                <p>{shortDesc}</p>
             </div>
             <ProductButtons {...product} />
             <div className={styles.product__info}>
@@ -42,10 +44,7 @@ const ProductInfo = (product: IProduct) => {
                     SKU: <span>1995751877966</span>
                 </p>
                 <p>
-                    Categories: <span>Potter Plants</span>
-                </p>
-                <p>
-                    Tags: <span>Home, Garden, Plants</span>
+                    Categories: <span>{category?.name}</span>
                 </p>
             </div>
             <div className={styles.product__share}>

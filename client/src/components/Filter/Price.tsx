@@ -17,6 +17,7 @@ const Price = () => {
         setSearchParams((params) => {
             params.set('from', prices[0].toString());
             params.set('to', prices[1].toString());
+            params.delete('page');
             return params;
         });
     };

@@ -1,6 +1,6 @@
 import prisma from './prisma';
 import { hashSync } from 'bcrypt';
-import { cartItems, carts, categories, products } from './consts';
+import { cartItems, carts, categories, products } from '../src/consts';
 
 async function up() {
     await prisma.user.createMany({

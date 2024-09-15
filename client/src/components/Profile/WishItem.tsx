@@ -22,7 +22,7 @@ const WishItem = ({ userId, product }: Props) => {
     return (
         <div>
             <section onClick={() => navigate(getProductRoute(product.id))}>
-                <img src="/img/flowers.png" alt="flower" />
+                <img src={product.imageUrl} alt="flower" />
                 <h4>{product.name}</h4>
             </section>
             <p>{withDiscount(product.price, product.sale)}$</p>

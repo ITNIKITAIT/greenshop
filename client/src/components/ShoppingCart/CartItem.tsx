@@ -6,7 +6,15 @@ import { getProductRoute } from '../../utils/consts';
 import { useNavigate } from 'react-router-dom';
 import { cartApi } from '../../api/cartApi';
 
-const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
+const CartItem = ({
+    id,
+    sale,
+    price,
+    name,
+    quantity,
+    imageUrl,
+    productId,
+}: ICartItem) => {
     const navigate = useNavigate();
 
     const [updateCart] = cartApi.useUpdateCartMutation();
@@ -29,8 +37,8 @@ const CartItem = ({ id, sale, price, name, quantity }: ICartItem) => {
         <>
             <div
                 className={styles.item}
-                onClick={() => navigate(getProductRoute(id))}>
-                <img src="/img/flowers.png" alt="flower" />
+                onClick={() => navigate(getProductRoute(productId))}>
+                <img src={imageUrl} alt="flower" />
                 <section>
                     <h5 className={styles.item__name}>{name}</h5>
                     <p className={styles.item__SKU}>

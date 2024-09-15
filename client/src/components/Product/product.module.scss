@@ -3,13 +3,14 @@
 .product {
     &__wrapper {
         display: flex;
-        justify-content: space-between;
+        gap: 70px;
         align-items: center;
     }
     &__imgs {
         display: flex;
         gap: 30px;
         align-items: center;
+        border: 1px solid $greenColor;
 
         .list {
             display: flex;
@@ -42,8 +43,8 @@
         align-items: center;
 
         img {
-            width: 400px;
-            height: auto;
+            max-width: 400px;
+            max-height: 400px;
         }
     }
 

@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
-    const { id, name, price, sale } = product;
+    const { id, name, price, sale, imageUrl } = product;
 
     const navigate = useNavigate();
     const isFavourite = useAppSelector((state) => selectItemById(state, id));
@@ -28,7 +28,7 @@ const ProductCard = ({ product }: Props) => {
 
     const addToCart = async (e: MouseEvent) => {
         e.stopPropagation();
-        addCartItem({ ...product, quantity: 1 });
+        addCartItem({ ...product, quantity: 1, productId: id });
     };
 
     const toggleFavourites = (e: MouseEvent) => {
@@ -49,7 +49,8 @@ const ProductCard = ({ product }: Props) => {
             <div
                 className={styles.img__wrapper}
                 onClick={() => navigate(getProductRoute(id))}>
-                <img src="/img/flowers.png" alt="" />
+                <img src={imageUrl} alt="" />
+
                 <div className={styles.product__buttons}>
                     <div onClick={addToCart}>
                         <IoCartOutline className={styles.product__icons} />

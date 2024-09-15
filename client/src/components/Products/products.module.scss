@@ -107,7 +107,7 @@
                 font-size: 20px;
             }
             &:hover * {
-                color: $greenColor;
+                color: $greenColor !important;
             }
         }
     }

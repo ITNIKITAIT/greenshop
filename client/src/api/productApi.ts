@@ -36,8 +36,11 @@ export const productApi = createApi({
         getProductBySearch: builder.query<IProduct[], string>({
             query: (q) => `/search?q=${q}`,
         }),
-        getCategory: builder.query<ICategory[], void>({
-            query: () => `/category`,
+        getCategories: builder.query<ICategory[], void>({
+            query: () => `/categories`,
+        }),
+        getProductCategory: builder.query<ICategory, number>({
+            query: (id) => `/category/${id}`,
         }),
     }),
 });

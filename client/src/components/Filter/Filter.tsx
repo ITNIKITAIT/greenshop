@@ -5,7 +5,7 @@ import Price from './Price';
 import styles from './filter.module.scss';
 
 const Filter = () => {
-    const { data: categories, isLoading } = productApi.useGetCategoryQuery();
+    const { data: categories, isLoading } = productApi.useGetCategoriesQuery();
 
     return (
         <div className={styles.filter}>

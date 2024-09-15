@@ -34,7 +34,6 @@ const Navbar = () => {
                 to={SHOP_ROUTE}>
                 Shop
             </Link>
-            <li className={styles.navbar__item}>Plant Care</li>
         </div>
     );
 };

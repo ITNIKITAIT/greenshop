@@ -25,7 +25,7 @@ const ProductButtons = (product: IProduct) => {
     };
 
     const handleAddItem = () => {
-        addCartItem({ ...product, quantity: count });
+        addCartItem({ ...product, quantity: count, productId: product.id });
     };
 
     const handleMinus = () => {

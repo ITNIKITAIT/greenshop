@@ -18,10 +18,10 @@ const Product = () => {
     return (
         <div className="container">
             <div className={styles.product__wrapper}>
-                <ProductImages />
+                <ProductImages imageUrl={product?.imageUrl as string} />
                 <ProductInfo {...(product as IProduct)} />
             </div>
-            <ProductMore />
+            <ProductMore fullDesc={product?.fullDesc as string} />
             <ReletedProducts />
         </div>
     );

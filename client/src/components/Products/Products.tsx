@@ -9,7 +9,9 @@ import Pagination from './Pagination';
 export interface IProduct {
     id: number;
     name: string;
-    description: string | null;
+    shortDesc: string;
+    fullDesc: string;
+    imageUrl: string;
     sale: number | null;
     price: number;
     rating: number;

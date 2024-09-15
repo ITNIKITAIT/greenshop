@@ -36,12 +36,14 @@ model User {
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
-  name        String
-  description String?
-  sale        Float?
-  price       Float
-  rating      Float   @default(0)
+  id        Int    @id @default(autoincrement())
+  name      String
+  shortDesc String
+  fullDesc  String
+  imageUrl  String
+  sale      Float?
+  price     Float
+  rating    Float  @default(0)
 
   cartItems CartItem[]
   wishItems WishItem[]

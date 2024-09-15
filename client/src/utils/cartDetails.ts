@@ -23,12 +23,15 @@ export const getCartDetails = (data: CartDTO): ICart => {
         id: item.id,
         quantity: item.quantity,
         name: item.product.name,
-        description: item.product.description,
+        shortDesc: item.product.shortDesc,
+        fullDesc: item.product.fullDesc,
         price: item.product.price,
         rating: item.product.rating,
         sale: item.product.sale,
+        imageUrl: item.product.imageUrl,
         categoryId: item.product.categoryId,
         createdAt: item.product.createdAt,
+        productId: item.product.id,
     }));
     return {
         items,

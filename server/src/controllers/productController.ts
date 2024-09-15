@@ -88,7 +88,7 @@ class ProductController {
         }
     }
 
-    async getCategory(req: Request, res: Response) {
+    async getCategories(req: Request, res: Response) {
         try {
             const categories = await prisma.category.findMany({
                 include: {
@@ -96,6 +96,17 @@ class ProductController {
                 },
             });
             res.json(categories);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    async getProductCategory(req: Request, res: Response) {
+        const { id } = req.params;
+        try {
+            const category = await prisma.category.findFirst({
+                where: { id: Number(id) },
+            });
+            res.json(category);
         } catch (e) {
             console.log(e);
         }
