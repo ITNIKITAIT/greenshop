@@ -8,6 +8,9 @@ export const cartApi = createApi({
     tagTypes: ['Cart'],
     baseQuery: fetchBaseQuery({
         baseUrl: API_URL + '/cart',
+        prepareHeaders(headers) {
+            return headers;
+        },
         credentials: 'include',
     }),
     endpoints: (builder) => ({
@@ -37,6 +40,7 @@ export const cartApi = createApi({
                 url: `/`,
                 method: 'POST',
                 body: { product },
+                credentials: 'include',
             }),
             invalidatesTags: ['Cart'],
         }),
