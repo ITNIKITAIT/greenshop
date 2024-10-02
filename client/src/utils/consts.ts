@@ -5,7 +5,7 @@ const SHOPPING_CART_ROUTE: string = SHOP_ROUTE + '/shoppingCart';
 const CHECKOUT_ROUTE: string = SHOP_ROUTE + '/checkout';
 const PROFILE_ROUTE = '/profile';
 
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://greenshop-client.vercel.app';
 // export const API_URL = 'http://localhost:5000/api';
 export const API_URL = 'https://greenshop-api.onrender.com/api';
 
