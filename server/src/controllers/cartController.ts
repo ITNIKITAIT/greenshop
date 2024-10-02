@@ -105,7 +105,10 @@ class CartController {
                     },
                 });
             }
-            res.cookie('cartToken', token);
+            res.cookie('cartToken', token, {
+                httpOnly: true,
+                secure: true,
+            });
             res.json('Success');
         } catch (e) {
             console.log(e);
