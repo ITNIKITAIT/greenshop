@@ -73,7 +73,7 @@ class CartController {
     async addCartItem(req: Request, res: Response) {
         const product = req.body.product;
         let token = req.cookies.cartToken;
-        console.log(token);
+        console.log(req.cookies);
         try {
             if (!token) {
                 token = crypto.randomUUID();
@@ -108,6 +108,7 @@ class CartController {
             res.cookie('cartToken', token, {
                 httpOnly: true,
                 secure: true,
+                sameSite: 'none',
             });
             res.json('Success');
         } catch (e) {
