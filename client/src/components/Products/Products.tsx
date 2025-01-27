@@ -1,4 +1,5 @@
 import ProductCard from './ProductCard';
+import { ImSpinner8 } from 'react-icons/im';
 import Sort from '../Sort/Sort';
 import styles from './products.module.scss';
 import { productApi } from '../../api/productApi';
@@ -26,14 +27,14 @@ const Products = () => {
         getSearchParams(searchParams)
     );
 
-    if (data?.products.length === 0) {
-        return <div className={styles.NotFound}>No products found</div>;
-    }
-
     return (
         <div className={styles.products}>
             <Sort />
-            {!isLoading && (
+            {data?.products.length === 0 ? (
+                <div className={styles.NotFound}>No products found</div>
+            ) : isLoading ? (
+                <ImSpinner8 className={styles.loader} />
+            ) : (
                 <>
                     <div className={styles.products__list}>
                         {(data?.products ?? []).map((product) => (

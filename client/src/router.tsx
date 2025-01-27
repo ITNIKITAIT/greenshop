@@ -13,18 +13,15 @@ import {
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import ShoppingCartPage from './pages/ShoppingCartPage';
 import CheckoutPage from './pages/CheckoutPage';
-import { store } from './store/store';
 import Root from './pages/Root';
 import RootShop from './pages/RootShop';
 import ProfilePage from './pages/ProfilePage';
-import { fetchCart, fetchUser } from './modules/fetching';
 
 export const router = createBrowserRouter([
     {
         path: HOME_ROUTE,
         element: <Root />,
         errorElement: <NotFoundPage />,
-        loader: async () => store.dispatch(fetchCart()),
         children: [
             {
                 index: true,
@@ -55,7 +52,6 @@ export const router = createBrowserRouter([
             {
                 path: PROFILE_ROUTE,
                 element: <ProfilePage />,
-                loader: async () => store.dispatch(fetchUser()),
             },
         ],
     },

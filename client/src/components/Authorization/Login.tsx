@@ -40,7 +40,11 @@ const Login = ({ togglePassword, passwordIsHidden, closeModalAuth }: Props) => {
             closeModalAuth();
         }
         if (error) {
-            toast.error(JSON.stringify(error));
+            toast.error(
+                'data' in error
+                    ? (error.data as { message: string }).message
+                    : 'An unknown error occurred'
+            );
         }
     };
 

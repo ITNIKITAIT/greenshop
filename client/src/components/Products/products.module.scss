@@ -183,6 +183,28 @@
 .NotFound {
     font-size: 40px;
     color: $greenColor;
+    text-align: center;
     font-weight: 600;
     margin: 40px auto 0 auto;
+}
+
+.loader {
+    color: $greenColor;
+    width: 50px;
+    height: 50px;
+    margin-left: 400px;
+    margin-top: 30px;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
