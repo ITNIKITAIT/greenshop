@@ -37,8 +37,8 @@ GreenShop is a web application for an online store that offers eco-friendly and 
     npm install
     npm start
     ```
-4. **Set up environment variables**
-   Create a .env file in the root directory and add the required configuration:
+4. ##### **Set up environment variables**
+    Create a `.env` file in the root directory and add the required configuration:
 
 ## 📌 Contributing
 
